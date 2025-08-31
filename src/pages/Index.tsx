@@ -16,6 +16,9 @@ import ReferralSection from "@/components/ReferralSection";
 import CTAMiniForm from "@/components/CTAMiniForm";
 import Footer from "@/components/Footer";
 import ProgressBar from "@/components/ProgressBar";
+import FloatingElements from "@/components/FloatingElements";
+import StatsSection from "@/components/StatsSection";
+import TrustBadges from "@/components/TrustBadges";
 
 const Index = () => {
   useEffect(() => {
@@ -42,9 +45,12 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <ProgressBar />
+      <FloatingElements />
       <Header />
       <main>
         <HeroSection />
+        
+        <TrustBadges />
         
         <CTAMiniForm 
           variant="quiz" 
@@ -53,6 +59,8 @@ const Index = () => {
         />
         
         <AudiencesSection />
+        
+        <StatsSection />
         
         <CTAMiniForm 
           variant="calculator"

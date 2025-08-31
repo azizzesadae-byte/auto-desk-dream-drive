@@ -5,6 +5,7 @@ import { Play, ChevronRight, Shield, TrendingDown, Clock, Star, Car, Gift, Dolla
 import davidych from "@/assets/davidych.jpg";
 import QuizModal from "@/components/QuizModal";
 import CalculatorModal from "@/components/CalculatorModal";
+import CountdownTimer from "@/components/CountdownTimer";
 
 export default function HeroSection() {
   const [isQuizOpen, setIsQuizOpen] = useState(false);
@@ -71,9 +72,9 @@ export default function HeroSection() {
               </span>
             </div>
 
-            <h1 className="text-5xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
+            <h1 className="text-5xl lg:text-7xl font-heading font-black text-foreground mb-6 leading-tight">
               Авто из-за границы{" "}
-              <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+              <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent animate-pulse">
                 под ключ
               </span>
             </h1>

@@ -12,6 +12,7 @@ import {
   Sparkles
 } from "lucide-react";
 import { toast } from "sonner";
+import CountdownTimer from "@/components/CountdownTimer";
 
 export default function CTASection() {
   const [formData, setFormData] = useState({
@@ -51,9 +52,12 @@ export default function CTASection() {
               идеальный авто?
             </span>
           </h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-xl text-muted-foreground max-w-3xl mx-auto mb-6">
             Мы готовы приступить к поиску прямо сейчас. Выберите удобный способ связи!
           </p>
+          <div className="flex justify-center">
+            <CountdownTimer />
+          </div>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
