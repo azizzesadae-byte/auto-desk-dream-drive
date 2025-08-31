@@ -167,10 +167,10 @@ const OverlayManager = () => {
     const isMobile = window.innerWidth < 768;
     
     switch (position) {
-      case "top-left": return `${base} ${isMobile ? 'top-28' : 'top-20'} left-0`;
-      case "top-right": return `${base} ${isMobile ? 'top-28' : 'top-20'} right-0`;
-      case "bottom-left": return `${base} ${isMobile ? 'bottom-28' : 'bottom-4'} left-0`;
-      case "bottom-right": return `${base} ${isMobile ? 'bottom-28' : 'bottom-4'} right-0`;
+      case "top-left": return `${base} ${isMobile ? 'top-36' : 'top-24'} left-0`;
+      case "top-right": return `${base} ${isMobile ? 'top-36' : 'top-24'} right-0`;
+      case "bottom-left": return `${base} ${isMobile ? 'bottom-20' : 'bottom-4'} left-0`;
+      case "bottom-right": return `${base} ${isMobile ? 'bottom-20' : 'bottom-4'} right-0`;
       case "center": return `${base} top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`;
     }
   };

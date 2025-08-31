@@ -36,7 +36,7 @@ export default function HeroSection() {
 
 
   return (
-    <section className="relative min-h-screen md:min-h-screen min-h-[60vh] flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative min-h-screen md:min-h-screen min-h-[80vh] flex items-center justify-center overflow-hidden pt-32 md:pt-24">
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
         <video
@@ -52,7 +52,7 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-background/50" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-3 md:px-4">
+      <div className="relative z-10 container mx-auto px-4 md:px-4">
         <div className="grid lg:grid-cols-2 gap-6 md:gap-12 items-center">
           {/* Main Content */}
           <div className="animate-fade-in">
@@ -64,56 +64,58 @@ export default function HeroSection() {
               </span>
             </div>
 
-            <h1 className="text-5xl lg:text-7xl font-heading font-black text-foreground mb-6 leading-tight">
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-heading font-black text-foreground mb-6 leading-tight">
               Price-Lock 30:{" "}
               <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
                 фиксируем цену и курс
               </span>
             </h1>
 
-            <p className="text-xl lg:text-2xl text-muted-foreground mb-8">
+            <p className="text-lg md:text-xl lg:text-2xl text-muted-foreground mb-8">
               Перерасход = за наш счёт • SLA +1% за каждую неделю
             </p>
 
             {/* Top 3 Killer Features Only */}
-            <div className="flex flex-col gap-3 mb-8">
-              <div className="flex items-center gap-3 bg-primary/10 border-primary/30 backdrop-blur-sm px-4 py-3 rounded-lg border">
-                <Shield className="w-6 h-6 text-primary flex-shrink-0" />
-                <span className="text-base text-foreground font-medium">
+            <div className="flex flex-col gap-2 md:gap-3 mb-6 md:mb-8">
+              <div className="flex items-center gap-3 bg-primary/10 border-primary/30 backdrop-blur-sm px-3 md:px-4 py-2 md:py-3 rounded-lg border">
+                <Shield className="w-5 md:w-6 h-5 md:h-6 text-primary flex-shrink-0" />
+                <span className="text-sm md:text-base text-foreground font-medium">
                   Эскроу-счет в РФ: полная защита средств
                 </span>
               </div>
-              <div className="flex items-center gap-3 bg-primary/10 border-primary/30 backdrop-blur-sm px-4 py-3 rounded-lg border">
-                <TrendingDown className="w-6 h-6 text-primary flex-shrink-0" />
-                <span className="text-base text-foreground font-medium">
+              <div className="flex items-center gap-3 bg-primary/10 border-primary/30 backdrop-blur-sm px-3 md:px-4 py-2 md:py-3 rounded-lg border">
+                <TrendingDown className="w-5 md:w-6 h-5 md:h-6 text-primary flex-shrink-0" />
+                <span className="text-sm md:text-base text-foreground font-medium">
                   Возврат 85% через год: гарантированный выкуп
                 </span>
               </div>
-              <div className="flex items-center gap-3 bg-card/50 border-border/50 backdrop-blur-sm px-4 py-3 rounded-lg border">
-                <Gift className="w-6 h-6 text-muted-foreground flex-shrink-0" />
-                <span className="text-base text-muted-foreground">
+              <div className="flex items-center gap-3 bg-card/50 border-border/50 backdrop-blur-sm px-3 md:px-4 py-2 md:py-3 rounded-lg border">
+                <Gift className="w-5 md:w-6 h-5 md:h-6 text-muted-foreground flex-shrink-0" />
+                <span className="text-sm md:text-base text-muted-foreground">
                   50/50: делим сторгованное пополам
                 </span>
               </div>
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 mb-6 md:mb-8">
               <Button
                 size="lg"
-                className="group bg-gradient-to-r from-primary to-primary-glow hover:shadow-glow text-lg px-8 py-6"
+                className="group bg-gradient-to-r from-primary to-primary-glow hover:shadow-glow text-base md:text-lg px-6 md:px-8 py-5 md:py-6"
                 onClick={() => setIsQuizOpen(true)}
               >
-                Получить 5 вариантов за 60 минут
+                <span className="hidden sm:inline">Получить 5 вариантов за 60 минут</span>
+                <span className="sm:hidden">Получить 5 вариантов</span>
                 <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button
                 size="lg"
                 variant="outline"
-                className="border-primary/50 hover:bg-primary/10 text-lg px-8 py-6"
+                className="border-primary/50 hover:bg-primary/10 text-base md:text-lg px-6 md:px-8 py-5 md:py-6"
                 onClick={() => setIsCalculatorOpen(true)}
               >
-                Узнать финальную цену под ключ
+                <span className="hidden sm:inline">Узнать финальную цену под ключ</span>
+                <span className="sm:hidden">Узнать цену под ключ</span>
               </Button>
             </div>
 
@@ -135,8 +137,8 @@ export default function HeroSection() {
           </div>
 
           {/* Right Side - Enhanced Davidych Card */}
-          <div className="relative animate-slide-in-right">
-            <div className="bg-card/90 backdrop-blur-md rounded-2xl p-6 border border-primary/30 shadow-glow">
+          <div className="relative animate-slide-in-right mt-8 lg:mt-0">
+            <div className="bg-card/90 backdrop-blur-md rounded-2xl p-4 md:p-6 border border-primary/30 shadow-glow">
               <div className="flex items-start gap-4">
                 <img
                   src={davidych}
@@ -164,7 +166,7 @@ export default function HeroSection() {
               </div>
 
               {/* Special Offers */}
-              <div className="mt-4 p-4 bg-gradient-to-r from-primary/10 to-primary-glow/10 rounded-xl border border-primary/20">
+              <div className="mt-4 p-3 md:p-4 bg-gradient-to-r from-primary/10 to-primary-glow/10 rounded-xl border border-primary/20">
                 <div className="flex items-center justify-between mb-2">
                   <span className="text-sm font-bold text-foreground">Эксклюзивные условия:</span>
                   <span className="text-xs bg-accent text-accent-foreground px-2 py-1 rounded-full animate-pulse">

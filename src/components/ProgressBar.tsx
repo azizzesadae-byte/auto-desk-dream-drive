@@ -64,7 +64,7 @@ const ProgressBar = () => {
   return (
     <>
       {/* Progress bar with enhanced visibility */}
-      <div className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+      <div className={`fixed top-0 left-0 right-0 z-[70] transition-all duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
         {/* Enhanced progress bar */}
         <div className="h-3 bg-gradient-to-r from-primary/20 to-primary-glow/20 relative overflow-hidden">
           <div 
