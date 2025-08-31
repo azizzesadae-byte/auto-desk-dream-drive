@@ -43,7 +43,7 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32">
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
         <video
@@ -247,9 +247,10 @@ export default function HeroSection() {
       )}
 
       {/* Scroll Indicator */}
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-float">
-        <div className="w-8 h-12 border-2 border-primary/50 rounded-full flex items-start justify-center pt-2">
-          <div className="w-1 h-3 bg-primary rounded-full animate-bounce" />
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <div className="flex flex-col items-center gap-2 text-muted-foreground">
+          <span className="text-sm">Листайте вниз</span>
+          <ChevronDown className="w-6 h-6" />
         </div>
       </div>
 
@@ -259,13 +260,6 @@ export default function HeroSection() {
 
       <QuizModal isOpen={isQuizOpen} onClose={() => setIsQuizOpen(false)} />
       <CalculatorModal isOpen={isCalculatorOpen} onClose={() => setIsCalculatorOpen(false)} />
-      {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-        <div className="flex flex-col items-center gap-2 text-muted-foreground">
-          <span className="text-sm">Листайте вниз</span>
-          <ChevronDown className="w-6 h-6" />
-        </div>
-      </div>
     </section>
   );
 }
