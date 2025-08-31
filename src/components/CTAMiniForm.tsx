@@ -18,11 +18,40 @@ const CTAMiniForm = ({ variant = "bonus", title, description }: CTAMiniFormProps
   const [showQuiz, setShowQuiz] = useState(false);
   const [showCalculator, setShowCalculator] = useState(false);
 
+  const formatPhoneNumber = (value: string) => {
+    const phoneNumber = value.replace(/[^\d]/g, '');
+    const phoneNumberLength = phoneNumber.length;
+    
+    if (phoneNumberLength < 2) return phoneNumber;
+    if (phoneNumberLength < 5) {
+      return `+7 (${phoneNumber.slice(1)}`;
+    }
+    if (phoneNumberLength < 8) {
+      return `+7 (${phoneNumber.slice(1, 4)}) ${phoneNumber.slice(4)}`;
+    }
+    if (phoneNumberLength < 10) {
+      return `+7 (${phoneNumber.slice(1, 4)}) ${phoneNumber.slice(4, 7)}-${phoneNumber.slice(7)}`;
+    }
+    return `+7 (${phoneNumber.slice(1, 4)}) ${phoneNumber.slice(4, 7)}-${phoneNumber.slice(7, 9)}-${phoneNumber.slice(9, 11)}`;
+  };
+
+  const handlePhoneChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const formatted = formatPhoneNumber(e.target.value);
+    setPhone(formatted);
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (phone.length >= 10) {
-      toast.success("Отлично! Менеджер свяжется с вами в течение 5 минут!");
+    const phoneDigits = phone.replace(/[^\d]/g, '');
+    if (phoneDigits.length >= 11) {
+      toast.success(
+        variant === "bonus" 
+          ? "🎉 Отлично! Ваш бонус активирован. Менеджер свяжется с вами в течение 5 минут!"
+          : "✅ Спасибо! Мы перезвоним вам в течение 5 минут!"
+      );
       setPhone("");
+    } else {
+      toast.error("Пожалуйста, введите корректный номер телефона");
     }
   };
 
@@ -142,11 +171,17 @@ const CTAMiniForm = ({ variant = "bonus", title, description }: CTAMiniFormProps
                   type="tel"
                   placeholder="+7 (999) 999-99-99"
                   value={phone}
-                  onChange={(e) => setPhone(e.target.value)}
-                  className="min-w-[200px]"
+                  onChange={handlePhoneChange}
+                  className="min-w-[200px] h-12"
                   required
+                  maxLength={18}
                 />
-                <Button type="submit" size="lg" className="min-w-[150px] font-semibold">
+                <Button 
+                  type="submit" 
+                  size="lg" 
+                  className="min-w-[150px] h-12 font-semibold"
+                  data-cta-trigger={variant === "callback"}
+                >
                   <Sparkles className="w-4 h-4 mr-2" />
                   {currentVariant.buttonText}
                 </Button>

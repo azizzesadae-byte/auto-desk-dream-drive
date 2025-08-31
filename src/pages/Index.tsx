@@ -16,7 +16,7 @@ import ReferralSection from "@/components/ReferralSection";
 import CTAMiniForm from "@/components/CTAMiniForm";
 import Footer from "@/components/Footer";
 import ProgressBar from "@/components/ProgressBar";
-import FloatingElements from "@/components/FloatingElements";
+import OverlayManager from "@/components/OverlayManager";
 import StatsSection from "@/components/StatsSection";
 import TrustBadges from "@/components/TrustBadges";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -46,7 +46,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background">
       <ProgressBar />
-      <FloatingElements />
+      <OverlayManager />
       <ScrollToTop />
       <Header />
       <main>

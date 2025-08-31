@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
@@ -12,28 +12,41 @@ const ProgressBar = () => {
   const [hasClaimedBonus, setHasClaimedBonus] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
 
-  useEffect(() => {
-    const handleScroll = () => {
+  // Throttled scroll handler for better performance
+  const handleScroll = useCallback(() => {
+    let ticking = false;
+    
+    const updateProgress = () => {
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight - windowHeight;
       const scrollTop = window.scrollY;
       const progress = Math.min((scrollTop / documentHeight) * 100, 100);
       
       setScrollProgress(progress);
-      
-      // Always keep visible for better UX
       setIsVisible(true);
       
       if (progress >= 99 && !hasClaimedBonus && !localStorage.getItem("bonusClaimed")) {
         setShowBonus(true);
       }
+      
+      ticking = false;
     };
-
-    window.addEventListener("scroll", handleScroll);
-    handleScroll();
-
-    return () => window.removeEventListener("scroll", handleScroll);
+    
+    return () => {
+      if (!ticking) {
+        requestAnimationFrame(updateProgress);
+        ticking = true;
+      }
+    };
   }, [hasClaimedBonus]);
+
+  useEffect(() => {
+    const scrollHandler = handleScroll();
+    window.addEventListener("scroll", scrollHandler, { passive: true });
+    scrollHandler(); // Initial call
+
+    return () => window.removeEventListener("scroll", scrollHandler);
+  }, [handleScroll]);
 
   const handleClaimBonus = (e: React.FormEvent) => {
     e.preventDefault();
@@ -47,8 +60,8 @@ const ProgressBar = () => {
 
   return (
     <>
-      <div className={`fixed top-20 left-0 right-0 z-[45] transition-all duration-300 ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
-        <div className="bg-gradient-to-r from-primary/90 via-primary-glow/90 to-primary/90 backdrop-blur-md shadow-lg border-b border-primary/30">
+      <div className={`fixed top-[4.5rem] left-0 right-0 z-[49] transition-all duration-300 ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
+        <div className="bg-gradient-to-r from-primary/95 via-primary-glow/95 to-primary/95 backdrop-blur-md shadow-lg border-b border-primary/20">
           <div className="container mx-auto px-4 py-2">
             <div className="flex items-center gap-4">
               {/* Progress info */}
