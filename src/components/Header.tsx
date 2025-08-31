@@ -35,6 +35,9 @@ export default function Header() {
             <a href="#faq" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
               FAQ
             </a>
+            <a href="#referral" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+              Партнерам
+            </a>
             <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
               Контакты
             </a>
@@ -103,6 +106,9 @@ export default function Header() {
               </a>
               <a href="#faq" className="text-muted-foreground hover:text-foreground transition-colors">
                 FAQ
+              </a>
+              <a href="#referral" className="text-muted-foreground hover:text-foreground transition-colors">
+                Партнерам
               </a>
               <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">
                 Контакты

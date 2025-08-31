@@ -12,6 +12,7 @@ import CTASection from "@/components/CTASection";
 import FAQSection from "@/components/FAQSection";
 import CasesSection from "@/components/CasesSection";
 import CharitySection from "@/components/CharitySection";
+import ReferralSection from "@/components/ReferralSection";
 import CTAMiniForm from "@/components/CTAMiniForm";
 import Footer from "@/components/Footer";
 import ProgressBar from "@/components/ProgressBar";
@@ -57,6 +58,7 @@ const Index = () => {
         <VideoSection />
         <FAQSection />
         <FeaturesSection />
+        <ReferralSection />
         <CharitySection />
         <CTASection />
       </main>
