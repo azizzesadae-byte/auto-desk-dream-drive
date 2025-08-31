@@ -63,33 +63,34 @@ const ProgressBar = () => {
 
   return (
     <>
-      {/* Progress bar with proper positioning */}
-      <div className={`fixed top-16 left-0 right-0 z-[45] transition-all duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
-        <div className="h-1 bg-primary/20">
+      {/* Progress bar with proper positioning and visibility */}
+      <div className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+        {/* Progress bar */}
+        <div className="h-2 bg-primary/10">
           <div 
-            className="h-full bg-gradient-to-r from-primary to-primary-glow transition-all duration-500"
+            className="h-full bg-gradient-to-r from-primary to-primary-glow transition-all duration-500 shadow-glow"
             style={{ width: `${scrollProgress}%` }}
           />
         </div>
         
         {/* Compact info bar */}
-        <div className="bg-background/95 backdrop-blur-sm border-b border-border py-1">
-          <div className="container mx-auto px-4">
+        <div className="bg-background backdrop-blur-md border-b border-border/50 shadow-sm">
+          <div className="container mx-auto px-4 py-2">
             <div className="flex items-center justify-between">
-              <div className="flex items-center gap-2">
-                <span className="text-xs text-muted-foreground">Прогресс:</span>
-                <span className="text-xs font-bold text-primary">{Math.round(scrollProgress)}%</span>
+              <div className="flex items-center gap-3">
+                <span className="text-sm font-medium text-foreground">Прогресс изучения:</span>
+                <span className="text-sm font-bold text-primary bg-primary/10 px-2 py-0.5 rounded">{Math.round(scrollProgress)}%</span>
               </div>
               
               {scrollProgress < 99 ? (
-                <span className="text-xs text-muted-foreground">
-                  Изучите весь сайт и получите бонус 100,000₽
+                <span className="text-sm text-muted-foreground hidden sm:block">
+                  Изучите весь сайт → бонус 100,000₽
                 </span>
               ) : (
                 <div className="flex items-center gap-2">
-                  <Trophy className="w-4 h-4 text-yellow-500 animate-pulse" />
-                  <span className="text-xs font-bold text-primary">
-                    Бонус доступен!
+                  <Trophy className="w-5 h-5 text-yellow-500 animate-pulse" />
+                  <span className="text-sm font-bold text-primary animate-pulse">
+                    Бонус 100,000₽ доступен!
                   </span>
                 </div>
               )}

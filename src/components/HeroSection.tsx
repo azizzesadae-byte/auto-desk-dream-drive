@@ -34,14 +34,6 @@ export default function HeroSection() {
     { value: "45+", label: "брендов несмотря на санкции", icon: Shield }
   ];
 
-  const killerFeatures = [
-    { icon: Shield, text: "Эскроу-счет в РФ", highlight: true },
-    { icon: TrendingDown, text: "SLA +1% за каждую неделю", highlight: true },
-    { icon: Clock, text: "Price-Lock 30 дней" },
-    { icon: Gift, text: "Возврат 85% через год" },
-    { icon: Car, text: "Double-check от 2 экспертов" },
-    { icon: Zap, text: "LegalShield 360" }
-  ];
 
   return (
     <section className="relative min-h-screen md:min-h-screen min-h-[60vh] flex items-center justify-center overflow-hidden pt-20">
@@ -79,31 +71,30 @@ export default function HeroSection() {
               </span>
             </h1>
 
-            <p className="text-xl lg:text-2xl text-muted-foreground mb-4">
+            <p className="text-xl lg:text-2xl text-muted-foreground mb-8">
               Перерасход = за наш счёт • SLA +1% за каждую неделю
             </p>
 
-            <p className="text-lg text-muted-foreground/80 mb-8">
-              Эскроу-счет в РФ • LegalShield 360 • Double-check от 2 экспертов • 
-              Возврат 85% через год • Live-трансляция из контейнера
-            </p>
-
-            {/* Killer Features Grid */}
-            <div className="grid grid-cols-2 gap-3 mb-8">
-              {killerFeatures.map((feature, index) => (
-                <div
-                  key={index}
-                  className={`flex items-center gap-2 ${
-                    feature.highlight ? 'bg-primary/10 border-primary/30' : 'bg-card/50 border-border/50'
-                  } backdrop-blur-sm px-3 py-2 rounded-lg border animate-fade-in-up`}
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <feature.icon className={`w-5 h-5 ${feature.highlight ? 'text-primary' : 'text-muted-foreground'} flex-shrink-0`} />
-                  <span className={`text-sm ${feature.highlight ? 'text-foreground font-medium' : 'text-muted-foreground'}`}>
-                    {feature.text}
-                  </span>
-                </div>
-              ))}
+            {/* Top 3 Killer Features Only */}
+            <div className="flex flex-col gap-3 mb-8">
+              <div className="flex items-center gap-3 bg-primary/10 border-primary/30 backdrop-blur-sm px-4 py-3 rounded-lg border">
+                <Shield className="w-6 h-6 text-primary flex-shrink-0" />
+                <span className="text-base text-foreground font-medium">
+                  Эскроу-счет в РФ: полная защита средств
+                </span>
+              </div>
+              <div className="flex items-center gap-3 bg-primary/10 border-primary/30 backdrop-blur-sm px-4 py-3 rounded-lg border">
+                <TrendingDown className="w-6 h-6 text-primary flex-shrink-0" />
+                <span className="text-base text-foreground font-medium">
+                  Возврат 85% через год: гарантированный выкуп
+                </span>
+              </div>
+              <div className="flex items-center gap-3 bg-card/50 border-border/50 backdrop-blur-sm px-4 py-3 rounded-lg border">
+                <Gift className="w-6 h-6 text-muted-foreground flex-shrink-0" />
+                <span className="text-base text-muted-foreground">
+                  50/50: делим сторгованное пополам
+                </span>
+              </div>
             </div>
 
             {/* CTA Buttons */}
