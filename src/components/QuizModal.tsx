@@ -82,9 +82,9 @@ export default function QuizModal({ isOpen, onClose }: QuizModalProps) {
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-2xl bg-card border-border">
-        <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-foreground">
+      <DialogContent className="max-w-2xl bg-card border-border max-h-[90vh] overflow-y-auto mx-4 sm:mx-auto">
+        <DialogHeader className="pr-10">
+          <DialogTitle className="text-xl md:text-2xl font-bold text-foreground">
             {showResult ? "Получите персональную подборку" : "Подберите авто под себя"}
           </DialogTitle>
         </DialogHeader>

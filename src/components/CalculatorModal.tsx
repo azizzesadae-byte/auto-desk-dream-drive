@@ -78,10 +78,10 @@ export default function CalculatorModal({ isOpen, onClose }: CalculatorModalProp
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-card border-border">
-        <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-foreground flex items-center gap-2">
-            <Calculator className="w-6 h-6 text-primary" />
+      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto bg-card border-border mx-4 sm:mx-auto">
+        <DialogHeader className="pr-10">
+          <DialogTitle className="text-xl md:text-2xl font-bold text-foreground flex items-center gap-2">
+            <Calculator className="w-5 h-5 md:w-6 md:h-6 text-primary" />
             Калькулятор стоимости авто
           </DialogTitle>
         </DialogHeader>

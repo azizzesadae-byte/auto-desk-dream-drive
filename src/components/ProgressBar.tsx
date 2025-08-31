@@ -126,9 +126,9 @@ const ProgressBar = () => {
           setShowBonus(false);
         }
       }}>
-        <DialogContent className="sm:max-w-md">
-          <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-2xl">
+        <DialogContent className="sm:max-w-md max-h-[90vh] overflow-y-auto mx-4 sm:mx-auto">
+          <DialogHeader className="pr-10">
+            <DialogTitle className="flex items-center gap-2 text-xl md:text-2xl">
               <Trophy className="w-8 h-8 text-yellow-500 animate-pulse" />
               Поздравляем! Вы изучили 100% сайта!
             </DialogTitle>
