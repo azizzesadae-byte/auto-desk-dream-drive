@@ -41,12 +41,12 @@ const CountdownTimer = ({ deadline, onExpire }: CountdownTimerProps) => {
   }, [deadline]);
 
   return (
-    <div className={`inline-flex items-center gap-3 px-4 py-2 rounded-lg ${
-      isUrgent ? 'bg-red-500/20 border border-red-500/50' : 'bg-primary/10 border border-primary/30'
+    <div className={`inline-flex items-center gap-3 px-4 py-3 rounded-lg ${
+      isUrgent ? 'bg-red-500/10 border-2 border-red-500/50' : 'bg-primary/10 border-2 border-primary/30'
     }`}>
       <div className="flex items-center gap-2">
-        <Clock className={`w-5 h-5 ${isUrgent ? 'text-red-500 animate-pulse' : 'text-primary'}`} />
-        <span className="text-sm font-medium">Осталось:</span>
+        <Clock className={`w-5 h-5 ${isUrgent ? 'text-red-600 animate-pulse' : 'text-primary'}`} />
+        <span className="text-sm font-semibold text-foreground">Осталось:</span>
       </div>
       
       <div className="flex items-center gap-2">

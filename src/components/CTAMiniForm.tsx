@@ -74,29 +74,29 @@ const CTAMiniForm = ({ variant = "bonus", title, description }: CTAMiniFormProps
         </div>
           <div className="container mx-auto px-4 relative z-10">
             <Card className={`relative overflow-hidden hover:shadow-2xl transition-all duration-500`}>
-              <div className={`absolute inset-0 bg-gradient-to-br ${currentVariant.color} opacity-30`} />
+              <div className={`absolute inset-0 bg-gradient-to-br ${currentVariant.color} opacity-20`} />
               
-              <div className="relative p-4 md:p-8">
-                <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6">
-                  <div className="p-3 md:p-4 rounded-2xl bg-background/80 backdrop-blur-sm text-primary animate-pulse">
+              <div className="relative p-6">
+                <div className="flex flex-col md:flex-row items-center gap-4">
+                  <div className="p-3 rounded-2xl bg-background/90 backdrop-blur-sm text-primary">
                     {currentVariant.icon}
                   </div>
                   
                   <div className="flex-1 text-center md:text-left">
-                    <h3 className="text-lg md:text-2xl font-bold mb-1 md:mb-2">
+                    <h3 className="text-xl md:text-2xl font-bold mb-2 text-foreground">
                       {title || currentVariant.defaultTitle}
                     </h3>
-                    <p className="text-xs md:text-base text-muted-foreground">
+                    <p className="text-base text-muted-foreground">
                       {description || currentVariant.defaultDescription}
                     </p>
                   </div>
                   
                   <Button 
-                    size="default" 
+                    size="lg" 
                     onClick={currentVariant.action}
-                    className="min-w-[150px] md:min-w-[200px] animate-bounce text-sm md:text-base h-10 md:h-12"
+                    className="min-w-[180px] font-semibold"
                   >
-                    <Sparkles className="w-3 h-3 md:w-4 md:h-4 mr-2" />
+                    <Sparkles className="w-4 h-4 mr-2" />
                     {currentVariant.buttonText}
                   </Button>
                 </div>
@@ -122,32 +122,32 @@ const CTAMiniForm = ({ variant = "bonus", title, description }: CTAMiniFormProps
         <Card className={`relative overflow-hidden hover:shadow-2xl transition-all duration-500`}>
           <div className={`absolute inset-0 bg-gradient-to-br ${currentVariant.color} opacity-30`} />
           
-          <form onSubmit={handleSubmit} className="relative p-4 md:p-8">
-            <div className="flex flex-col md:flex-row items-center gap-3 md:gap-6">
-              <div className="p-3 md:p-4 rounded-2xl bg-background/80 backdrop-blur-sm text-primary animate-pulse">
+          <form onSubmit={handleSubmit} className="relative p-6">
+            <div className="flex flex-col md:flex-row items-center gap-4">
+              <div className="p-3 rounded-2xl bg-background/90 backdrop-blur-sm text-primary">
                 {currentVariant.icon}
               </div>
               
               <div className="flex-1 text-center md:text-left">
-                <h3 className="text-lg md:text-2xl font-bold mb-1 md:mb-2">
+                <h3 className="text-xl md:text-2xl font-bold mb-2 text-foreground">
                   {title || currentVariant.defaultTitle}
                 </h3>
-                <p className="text-xs md:text-base text-muted-foreground">
+                <p className="text-base text-muted-foreground">
                   {description || currentVariant.defaultDescription}
                 </p>
               </div>
               
-              <div className="flex flex-col sm:flex-row gap-2 md:gap-3 w-full md:w-auto">
+              <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
                 <Input
                   type="tel"
                   placeholder="+7 (999) 999-99-99"
                   value={phone}
                   onChange={(e) => setPhone(e.target.value)}
-                  className="min-w-[150px] md:min-w-[200px] text-sm md:text-base h-10 md:h-12"
+                  className="min-w-[200px]"
                   required
                 />
-                <Button type="submit" size="default" className="min-w-[120px] md:min-w-[150px] text-sm md:text-base h-10 md:h-12">
-                  <Sparkles className="w-3 h-3 md:w-4 md:h-4 mr-2" />
+                <Button type="submit" size="lg" className="min-w-[150px] font-semibold">
+                  <Sparkles className="w-4 h-4 mr-2" />
                   {currentVariant.buttonText}
                 </Button>
               </div>

@@ -9,38 +9,38 @@ All colors MUST be HSL.
 @layer base {
   :root {
     /* Core colors - Auto-Desk theme */
-    --background: 200 19% 18%;
-    --foreground: 0 0% 100%;
+    --background: 0 0% 100%;
+    --foreground: 222 47% 11%;
     
-    --card: 200 15% 15%;
-    --card-foreground: 0 0% 100%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
     
-    --popover: 200 15% 15%;
-    --popover-foreground: 0 0% 100%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
     
-    /* Primary - Bright green */
-    --primary: 82 85% 55%;
-    --primary-foreground: 0 0% 0%;
-    --primary-glow: 82 85% 65%;
+    /* Primary - Deep blue */
+    --primary: 222 47% 40%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 210 50% 50%;
     
-    /* Secondary - Dark slate */
-    --secondary: 200 15% 25%;
-    --secondary-foreground: 0 0% 100%;
+    /* Secondary - Light gray */
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
     
-    --muted: 200 10% 35%;
-    --muted-foreground: 0 0% 70%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 35%;
     
-    /* Accent - Vibrant green */
-    --accent: 82 85% 55%;
-    --accent-foreground: 0 0% 0%;
-    --accent-glow: 82 85% 65%;
+    /* Accent - Vibrant blue */
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
+    --accent-glow: 210 50% 60%;
     
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
     
-    --border: 200 10% 25%;
-    --input: 200 15% 20%;
-    --ring: 82 85% 55%;
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 222 47% 40%;
     
     --radius: 0.75rem;
     
@@ -115,43 +115,59 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
   }
   
-  /* Mobile optimizations */
+  /* Mobile optimizations with better typography */
   @media (max-width: 768px) {
     html {
-      font-size: 14px; /* Reduce base font size on mobile */
+      font-size: 16px; /* Keep readable base font size */
     }
     
     .container {
-      @apply px-3; /* Reduce container padding */
+      @apply px-4; /* Comfortable padding */
     }
     
     section {
-      @apply py-8 !important; /* Reduce section padding */
+      @apply py-12 !important; /* Reasonable section padding */
     }
     
     h1 {
-      @apply text-3xl !important; /* Smaller headings */
+      @apply text-3xl md:text-5xl !important; /* Better hierarchy */
     }
     
     h2 {
-      @apply text-2xl !important;
+      @apply text-2xl md:text-4xl !important;
     }
     
     h3 {
-      @apply text-lg !important;
+      @apply text-xl md:text-2xl !important;
     }
     
     p {
-      @apply text-sm;
+      @apply text-base; /* Keep readable paragraph text */
     }
     
+    /* Consistent button sizes */
     .btn, button {
-      @apply text-sm py-2 px-3; /* Smaller buttons */
+      @apply min-h-[44px] px-4 text-base; /* Touch-friendly size */
     }
     
-    /* Reduce card padding */
+    /* Reduce card padding but keep readable */
     .card, [class*="Card"] {
-      @apply p-3 !important;
+      @apply p-4 !important;
     }
+  }
+  
+  /* Better contrast for text */
+  .text-muted-foreground {
+    @apply text-foreground/70 dark:text-foreground/70;
+  }
+  
+  /* Ensure buttons are always readable */
+  .btn-primary, [class*="primary"] button {
+    @apply text-white dark:text-background;
+  }
+  
+  /* Fix contrast on cards */
+  .card {
+    @apply bg-card/95 backdrop-blur-sm border-border/50;
   }
 }
