@@ -13,20 +13,26 @@ export default function Header() {
         <div className="flex items-center justify-between h-20">
           <Logo />
 
-          <nav className="hidden lg:flex items-center gap-8">
-            <a href="#audiences" className="text-muted-foreground hover:text-foreground transition-colors">
+          <nav className="hidden lg:flex items-center gap-6">
+            <a href="#audiences" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
               Для кого
             </a>
-            <a href="#advantages" className="text-muted-foreground hover:text-foreground transition-colors">
+            <a href="#advantages" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
               Преимущества
             </a>
-            <a href="#reviews" className="text-muted-foreground hover:text-foreground transition-colors">
+            <a href="#process" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+              Как работаем
+            </a>
+            <a href="#guarantees" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+              Гарантии
+            </a>
+            <a href="#reviews" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
               Отзывы
             </a>
-            <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">
+            <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
               Возможности
             </a>
-            <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">
+            <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
               Контакты
             </a>
           </nav>
@@ -79,6 +85,12 @@ export default function Header() {
               </a>
               <a href="#advantages" className="text-muted-foreground hover:text-foreground transition-colors">
                 Преимущества
+              </a>
+              <a href="#process" className="text-muted-foreground hover:text-foreground transition-colors">
+                Как работаем
+              </a>
+              <a href="#guarantees" className="text-muted-foreground hover:text-foreground transition-colors">
+                Гарантии
               </a>
               <a href="#reviews" className="text-muted-foreground hover:text-foreground transition-colors">
                 Отзывы
