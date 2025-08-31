@@ -1,150 +1,261 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Calculator, ChevronRight, Star, Sparkles, Check } from "lucide-react";
-import davidychPhoto from "@/assets/davidych.jpg";
+import { Play, ChevronRight, Shield, TrendingDown, Clock, Star, Car, Gift, DollarSign, Zap } from "lucide-react";
+import davidych from "@/assets/davidych.jpg";
 import QuizModal from "@/components/QuizModal";
 import CalculatorModal from "@/components/CalculatorModal";
 
 export default function HeroSection() {
   const [isQuizOpen, setIsQuizOpen] = useState(false);
   const [isCalculatorOpen, setIsCalculatorOpen] = useState(false);
-  const [showOffer, setShowOffer] = useState(true);
+  const [showOffer, setShowOffer] = useState(false);
+  const [currentStat, setCurrentStat] = useState(0);
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setShowOffer(true);
+    }, 3000);
+    return () => clearTimeout(timer);
+  }, []);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentStat((prev) => (prev + 1) % 4);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const stats = [
+    { value: "$105M+", label: "сэкономлено клиентам", icon: DollarSign },
+    { value: "45+", label: "брендов без санкций", icon: Shield },
+    { value: "85%", label: "гарантия выкупа", icon: TrendingDown },
+    { value: "50/50", label: "делим сторгованное", icon: Gift }
+  ];
+
+  const killerFeatures = [
+    { icon: Shield, text: "Live-видео из контейнера 24/7", highlight: true },
+    { icon: TrendingDown, text: "Экономия до 40% от цен РФ", highlight: true },
+    { icon: Clock, text: "Фиксация цены на 30 дней" },
+    { icon: Gift, text: "Поездка в Корею от $50K" },
+    { icon: Car, text: "Параллельный импорт 45+ брендов" },
+    { icon: Zap, text: "Tesla и электрокары под ключ" }
+  ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20">
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
         <video
           autoPlay
-          loop
           muted
+          loop
           playsInline
           className="absolute inset-0 w-full h-full object-cover"
         >
-          <source src="https://cdn.coverr.co/videos/coverr-luxury-cars-at-night-5659/1080p.mp4" type="video/mp4" />
+          <source src="https://cdn.pixabay.com/video/2019/11/18/29544-374055843_large.mp4" type="video/mp4" />
         </video>
-        <div className="absolute inset-0 bg-gradient-to-b from-background/90 via-background/70 to-background/90" />
+        <div className="absolute inset-0 bg-gradient-hero" />
+        <div className="absolute inset-0 bg-background/50" />
+      </div>
+
+      <div className="relative z-10 container mx-auto px-4">
+        <div className="grid lg:grid-cols-2 gap-12 items-center">
+          {/* Main Content */}
+          <div className="animate-fade-in">
+            {/* Special Badge */}
+            <div className="inline-flex items-center gap-2 bg-primary/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6 animate-pulse-glow">
+              <span className="w-2 h-2 bg-primary rounded-full animate-pulse"></span>
+              <span className="text-primary text-sm font-medium">
+                Работаем несмотря на санкции ЕС
+              </span>
+            </div>
+
+            <h1 className="text-5xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
+              Авто из-за границы{" "}
+              <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+                под ключ
+              </span>
+            </h1>
+
+            <p className="text-xl lg:text-2xl text-muted-foreground mb-4">
+              на 20–40% дешевле, чем в России
+            </p>
+
+            <p className="text-lg text-muted-foreground/80 mb-8">
+              Эксклюзив из ОАЭ и Японии, электрокары Tesla и ретро-авто – 
+              привезем любую машину вашей мечты. Полная гарантия и никаких хлопот!
+            </p>
+
+            {/* Killer Features Grid */}
+            <div className="grid grid-cols-2 gap-3 mb-8">
+              {killerFeatures.map((feature, index) => (
+                <div
+                  key={index}
+                  className={`flex items-center gap-2 ${
+                    feature.highlight ? 'bg-primary/10 border-primary/30' : 'bg-card/50 border-border/50'
+                  } backdrop-blur-sm px-3 py-2 rounded-lg border animate-fade-in-up`}
+                  style={{ animationDelay: `${index * 100}ms` }}
+                >
+                  <feature.icon className={`w-5 h-5 ${feature.highlight ? 'text-primary' : 'text-muted-foreground'} flex-shrink-0`} />
+                  <span className={`text-sm ${feature.highlight ? 'text-foreground font-medium' : 'text-muted-foreground'}`}>
+                    {feature.text}
+                  </span>
+                </div>
+              ))}
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 mb-8">
+              <Button
+                size="lg"
+                className="group bg-gradient-to-r from-primary to-primary-glow hover:shadow-glow text-lg px-8 py-6"
+                onClick={() => setIsQuizOpen(true)}
+              >
+                Подобрать авто под себя
+                <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </Button>
+              <Button
+                size="lg"
+                variant="outline"
+                className="border-primary/50 hover:bg-primary/10 text-lg px-8 py-6"
+                onClick={() => setIsCalculatorOpen(true)}
+              >
+                Рассчитать стоимость
+              </Button>
+            </div>
+
+            {/* Animated Stats */}
+            <div className="flex items-center gap-8 animate-fade-in" style={{ animationDelay: "800ms" }}>
+              <div className="flex items-center gap-3">
+                <div className="w-14 h-14 rounded-full bg-gradient-to-br from-primary/20 to-primary-glow/20 flex items-center justify-center animate-pulse-glow">
+                  {(() => {
+                    const IconComponent = stats[currentStat].icon;
+                    return <IconComponent className="w-7 h-7 text-primary" />;
+                  })()}
+                </div>
+                <div>
+                  <div className="text-2xl font-bold text-primary">{stats[currentStat].value}</div>
+                  <div className="text-xs text-muted-foreground">{stats[currentStat].label}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Right Side - Enhanced Davidych Card */}
+          <div className="relative animate-slide-in-right">
+            <div className="bg-card/90 backdrop-blur-md rounded-2xl p-6 border border-primary/30 shadow-glow">
+              <div className="flex items-start gap-4">
+                <img
+                  src={davidych}
+                  alt="Эрик Давидыч"
+                  className="w-24 h-24 rounded-full border-4 border-primary object-cover"
+                />
+                <div className="flex-1">
+                  <div className="flex items-center gap-2 mb-2">
+                    <span className="text-lg font-bold text-foreground">Эрик Давидыч</span>
+                    <span className="bg-primary/20 text-primary text-xs px-2 py-1 rounded-full">
+                      Рекомендует
+                    </span>
+                  </div>
+                  <p className="text-muted-foreground italic">
+                    "Привезут тачку в идеале и без переплат! Ребята делают всё по красоте, им можно доверять!"
+                  </p>
+                  <button
+                    onClick={() => document.getElementById('video')?.scrollIntoView({ behavior: 'smooth' })}
+                    className="mt-3 flex items-center gap-2 text-primary hover:text-primary-glow transition-colors"
+                  >
+                    <Play className="w-4 h-4" />
+                    <span className="text-sm">Смотреть видео</span>
+                  </button>
+                </div>
+              </div>
+
+              {/* Special Offers */}
+              <div className="mt-4 p-4 bg-gradient-to-r from-primary/10 to-primary-glow/10 rounded-xl border border-primary/20">
+                <div className="flex items-center justify-between mb-2">
+                  <span className="text-sm font-bold text-foreground">Эксклюзивные условия:</span>
+                  <span className="text-xs bg-accent text-accent-foreground px-2 py-1 rounded-full animate-pulse">
+                    Только сегодня
+                  </span>
+                </div>
+                <ul className="space-y-2">
+                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <span className="text-primary">✓</span>
+                    Бесплатная проверка по VIN
+                  </li>
+                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <span className="text-primary">✓</span>
+                    Видеоотчет с аукциона
+                  </li>
+                  <li className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <span className="text-primary">✓</span>
+                    Telegram-консьерж от Давидыча
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            {/* Trust Badges */}
+            <div className="grid grid-cols-3 gap-2 mt-4">
+              <div className="bg-card/60 backdrop-blur-sm px-3 py-2 rounded-lg text-center">
+                <div className="text-lg font-bold text-primary">100%</div>
+                <div className="text-xs text-muted-foreground">Возврат депозита</div>
+              </div>
+              <div className="bg-card/60 backdrop-blur-sm px-3 py-2 rounded-lg text-center">
+                <div className="text-lg font-bold text-primary">6 мес</div>
+                <div className="text-xs text-muted-foreground">Гарантия</div>
+              </div>
+              <div className="bg-card/60 backdrop-blur-sm px-3 py-2 rounded-lg text-center">
+                <div className="text-lg font-bold text-primary">45-60</div>
+                <div className="text-xs text-muted-foreground">Дней доставка</div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Popup Offer */}
       {showOffer && (
-        <div className="fixed top-24 left-1/2 transform -translate-x-1/2 z-40 animate-fade-in">
-          <div className="bg-gradient-to-r from-primary to-primary-glow p-4 rounded-lg shadow-glow flex items-center gap-4">
-            <Sparkles className="w-6 h-6 text-primary-foreground" />
-            <p className="text-primary-foreground font-medium">
-              🔥 Экономьте до 40% – привезем авто дешевле, чем в РФ!
-            </p>
-            <Button
-              variant="glass"
-              size="sm"
-              onClick={() => setIsQuizOpen(true)}
-            >
-              Узнать подробнее
-            </Button>
+        <div className="fixed bottom-8 right-8 z-50 animate-slide-in-right">
+          <div className="bg-card border-2 border-primary rounded-2xl p-6 max-w-sm shadow-glow">
             <button
               onClick={() => setShowOffer(false)}
-              className="text-primary-foreground/70 hover:text-primary-foreground"
+              className="absolute -top-2 -right-2 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center hover:bg-primary-glow transition-colors"
             >
               ✕
             </button>
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-2xl">🔥</span>
+              <h3 className="font-bold text-foreground">50,000₽ скидка за видеоотзыв!</h3>
+            </div>
+            <p className="text-sm text-muted-foreground mb-4">
+              Сделайте видеоотзыв после получения авто и получите скидку 50,000₽ на следующий заказ
+            </p>
+            <Button
+              size="sm"
+              className="w-full bg-gradient-to-r from-primary to-primary-glow"
+              onClick={() => {
+                setShowOffer(false);
+                setIsQuizOpen(true);
+              }}
+            >
+              Подробнее
+            </Button>
           </div>
         </div>
       )}
 
-      {/* Content */}
-      <div className="relative z-10 container mx-auto px-4 py-32">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Left Content */}
-          <div className="animate-fade-in-up">
-            <div className="inline-flex items-center gap-2 bg-accent/20 px-4 py-2 rounded-full mb-6">
-              <Star className="w-4 h-4 text-accent" />
-              <span className="text-accent text-sm font-medium">Premium Import Service</span>
-            </div>
-
-            <h1 className="text-5xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
-              Auto-Desk – авто из-за границы
-              <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent"> под ключ</span>
-            </h1>
-
-            <p className="text-xl text-muted-foreground mb-8">
-              На 20–40% дешевле, чем в России. Эксклюзив из ОАЭ и Японии, 
-              электрокары Tesla и ретро-авто – привезем любую машину вашей мечты. 
-              Полная гарантия и никаких хлопот!
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-4 mb-8">
-              <Button
-                variant="cta"
-                size="lg"
-                className="group"
-                onClick={() => setIsQuizOpen(true)}
-              >
-                <Sparkles className="w-5 h-5" />
-                Подобрать авто под себя
-                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-              <Button
-                variant="glass"
-                size="lg"
-                className="group"
-                onClick={() => setIsCalculatorOpen(true)}
-              >
-                <Calculator className="w-5 h-5" />
-                Рассчитать стоимость
-                <ChevronRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-              </Button>
-            </div>
-
-            <div className="flex flex-wrap gap-6 text-sm text-muted-foreground">
-              <div className="flex items-center gap-2">
-                <Check className="w-4 h-4 text-accent" />
-                100% гарантия
-              </div>
-              <div className="flex items-center gap-2">
-                <Check className="w-4 h-4 text-accent" />
-                Без переплат
-              </div>
-              <div className="flex items-center gap-2">
-                <Check className="w-4 h-4 text-accent" />
-                Под ключ
-              </div>
-            </div>
-          </div>
-
-          {/* Right Content - Davidych Quote */}
-          <div className="relative animate-slide-in-left">
-            <div className="bg-card/80 backdrop-blur-md p-8 rounded-2xl border border-border shadow-elegant">
-              <div className="flex items-start gap-6">
-                <img
-                  src={davidychPhoto}
-                  alt="Эрик Давидыч"
-                  className="w-24 h-24 rounded-full object-cover border-4 border-primary"
-                />
-                <div className="flex-1">
-                  <div className="flex items-center gap-2 mb-2">
-                    <Star className="w-5 h-5 text-accent fill-accent" />
-                    <Star className="w-5 h-5 text-accent fill-accent" />
-                    <Star className="w-5 h-5 text-accent fill-accent" />
-                    <Star className="w-5 h-5 text-accent fill-accent" />
-                    <Star className="w-5 h-5 text-accent fill-accent" />
-                  </div>
-                  <blockquote className="text-lg text-foreground mb-4 italic">
-                    "Привезут тачку в идеале и без переплат! Ребята делают всё по красоте!"
-                  </blockquote>
-                  <div>
-                    <p className="font-bold text-foreground">Эрик Давидыч</p>
-                    <p className="text-sm text-muted-foreground">Автоэксперт и блогер</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div className="absolute -top-4 -right-4 w-20 h-20 bg-gradient-to-br from-accent to-accent-glow rounded-full opacity-20 animate-pulse-glow" />
-            <div className="absolute -bottom-4 -left-4 w-32 h-32 bg-gradient-to-br from-primary to-primary-glow rounded-full opacity-10 animate-pulse-glow" />
-          </div>
+      {/* Scroll Indicator */}
+      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-float">
+        <div className="w-8 h-12 border-2 border-primary/50 rounded-full flex items-start justify-center pt-2">
+          <div className="w-1 h-3 bg-primary rounded-full animate-bounce" />
         </div>
       </div>
 
-      {/* Modals */}
+      {/* Hidden triggers for modals */}
+      <button id="quiz-trigger" className="hidden" onClick={() => setIsQuizOpen(true)} />
+      <button id="calculator-trigger" className="hidden" onClick={() => setIsCalculatorOpen(true)} />
+
       <QuizModal isOpen={isQuizOpen} onClose={() => setIsQuizOpen(false)} />
       <CalculatorModal isOpen={isCalculatorOpen} onClose={() => setIsCalculatorOpen(false)} />
     </section>
