@@ -17,6 +17,7 @@ import CTAMiniForm from "@/components/CTAMiniForm";
 import Footer from "@/components/Footer";
 import ProgressBar from "@/components/ProgressBar";
 import OverlayManager from "@/components/OverlayManager";
+import LiveNotifications from "@/components/LiveNotifications";
 import StatsSection from "@/components/StatsSection";
 import TrustBadges from "@/components/TrustBadges";
 import ScrollToTop from "@/components/ScrollToTop";
@@ -50,6 +51,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <ProgressBar />
       <OverlayManager />
+      <LiveNotifications />
       <ScrollToTop />
       <Header />
       <main>
