@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
+import { ChevronDown } from "lucide-react";
 import { Play, ChevronRight, Shield, TrendingDown, Clock, Star, Car, Gift, DollarSign, Zap } from "lucide-react";
 import davidych from "@/assets/davidych.jpg";
 import QuizModal from "@/components/QuizModal";
@@ -258,6 +259,13 @@ export default function HeroSection() {
 
       <QuizModal isOpen={isQuizOpen} onClose={() => setIsQuizOpen(false)} />
       <CalculatorModal isOpen={isCalculatorOpen} onClose={() => setIsCalculatorOpen(false)} />
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+        <div className="flex flex-col items-center gap-2 text-muted-foreground">
+          <span className="text-sm">Листайте вниз</span>
+          <ChevronDown className="w-6 h-6" />
+        </div>
+      </div>
     </section>
   );
 }

@@ -20,6 +20,9 @@ export default function Header() {
             <a href="#advantages" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
               Преимущества
             </a>
+            <a href="#cases" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+              Кейсы
+            </a>
             <a href="#process" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
               Как работаем
             </a>
@@ -29,8 +32,8 @@ export default function Header() {
             <a href="#reviews" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
               Отзывы
             </a>
-            <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
-              Возможности
+            <a href="#faq" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+              FAQ
             </a>
             <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
               Контакты
@@ -86,6 +89,9 @@ export default function Header() {
               <a href="#advantages" className="text-muted-foreground hover:text-foreground transition-colors">
                 Преимущества
               </a>
+              <a href="#cases" className="text-muted-foreground hover:text-foreground transition-colors">
+                Кейсы
+              </a>
               <a href="#process" className="text-muted-foreground hover:text-foreground transition-colors">
                 Как работаем
               </a>
@@ -95,8 +101,8 @@ export default function Header() {
               <a href="#reviews" className="text-muted-foreground hover:text-foreground transition-colors">
                 Отзывы
               </a>
-              <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors">
-                Возможности
+              <a href="#faq" className="text-muted-foreground hover:text-foreground transition-colors">
+                FAQ
               </a>
               <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">
                 Контакты

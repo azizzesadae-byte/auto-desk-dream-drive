@@ -9,7 +9,12 @@ import ReviewsSection from "@/components/ReviewsSection";
 import VideoSection from "@/components/VideoSection";
 import FeaturesSection from "@/components/FeaturesSection";
 import CTASection from "@/components/CTASection";
+import FAQSection from "@/components/FAQSection";
+import CasesSection from "@/components/CasesSection";
+import CharitySection from "@/components/CharitySection";
+import CTAMiniForm from "@/components/CTAMiniForm";
 import Footer from "@/components/Footer";
+import ProgressBar from "@/components/ProgressBar";
 
 const Index = () => {
   useEffect(() => {
@@ -35,16 +40,24 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <ProgressBar />
       <Header />
       <main>
         <HeroSection />
+        <CTAMiniForm variant="quiz" />
         <AudiencesSection />
+        <CTAMiniForm variant="calculator" />
         <AdvantagesSection />
+        <CTAMiniForm variant="bonus" />
+        <CasesSection />
         <ProcessSection />
+        <CTAMiniForm variant="callback" />
         <GuaranteesSection />
         <ReviewsSection />
         <VideoSection />
+        <FAQSection />
         <FeaturesSection />
+        <CharitySection />
         <CTASection />
       </main>
       <Footer />
