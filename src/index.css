@@ -114,4 +114,44 @@ All colors MUST be HSL.
   body {
     @apply bg-background text-foreground;
   }
+  
+  /* Mobile optimizations */
+  @media (max-width: 768px) {
+    html {
+      font-size: 14px; /* Reduce base font size on mobile */
+    }
+    
+    .container {
+      @apply px-3; /* Reduce container padding */
+    }
+    
+    section {
+      @apply py-8 !important; /* Reduce section padding */
+    }
+    
+    h1 {
+      @apply text-3xl !important; /* Smaller headings */
+    }
+    
+    h2 {
+      @apply text-2xl !important;
+    }
+    
+    h3 {
+      @apply text-lg !important;
+    }
+    
+    p {
+      @apply text-sm;
+    }
+    
+    .btn, button {
+      @apply text-sm py-2 px-3; /* Smaller buttons */
+    }
+    
+    /* Reduce card padding */
+    .card, [class*="Card"] {
+      @apply p-3 !important;
+    }
+  }
 }

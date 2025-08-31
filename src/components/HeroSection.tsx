@@ -44,7 +44,7 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-32">
+    <section className="relative min-h-screen md:min-h-screen min-h-[60vh] flex items-center justify-center overflow-hidden pt-24 md:pt-32">
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
         <video
@@ -60,8 +60,8 @@ export default function HeroSection() {
         <div className="absolute inset-0 bg-background/50" />
       </div>
 
-      <div className="relative z-10 container mx-auto px-4">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="relative z-10 container mx-auto px-3 md:px-4">
+        <div className="grid lg:grid-cols-2 gap-6 md:gap-12 items-center">
           {/* Main Content */}
           <div className="animate-fade-in">
             {/* Special Badge */}

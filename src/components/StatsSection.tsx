@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TrendingUp, Users, Car, Trophy } from "lucide-react";
 
 interface CounterProps {
@@ -86,7 +86,7 @@ const StatsSection = () => {
   ];
 
   return (
-    <section className="relative py-16 overflow-hidden">
+    <section className="relative py-8 md:py-16 overflow-hidden">
       {/* Animated background */}
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-gradient-to-r from-primary/5 via-background to-primary-glow/5" />
@@ -94,26 +94,26 @@ const StatsSection = () => {
         <div className="absolute bottom-1/2 right-1/4 w-96 h-96 bg-primary-glow/10 rounded-full blur-3xl animate-pulse delay-1000" />
       </div>
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="container mx-auto px-3 md:px-4 relative z-10">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6">
           {stats.map((stat, index) => (
             <div
               key={index}
               className="group relative overflow-hidden rounded-2xl hover:scale-105 transition-all duration-500"
             >
               <div className={`absolute inset-0 bg-gradient-to-br ${stat.color} opacity-20 group-hover:opacity-30 transition-opacity`} />
-              <div className="relative bg-card/80 backdrop-blur-sm p-6 text-center">
-                <div className="inline-flex p-3 rounded-full bg-background/50 text-primary mb-4">
-                  {stat.icon}
+              <div className="relative bg-card/80 backdrop-blur-sm p-3 md:p-6 text-center">
+                <div className="inline-flex p-2 md:p-3 rounded-full bg-background/50 text-primary mb-2 md:mb-4">
+                  {React.cloneElement(stat.icon, { className: "w-5 h-5 md:w-8 md:h-8" })}
                 </div>
-                <div className="text-3xl font-bold mb-2">
+                <div className="text-lg md:text-3xl font-bold mb-1 md:mb-2">
                   <AnimatedCounter 
                     end={stat.value} 
                     prefix={stat.prefix} 
                     suffix={stat.suffix}
                   />
                 </div>
-                <p className="text-sm text-muted-foreground">{stat.label}</p>
+                <p className="text-xs md:text-sm text-muted-foreground">{stat.label}</p>
               </div>
             </div>
           ))}
