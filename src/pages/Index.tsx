@@ -19,6 +19,7 @@ import ProgressBar from "@/components/ProgressBar";
 import FloatingElements from "@/components/FloatingElements";
 import StatsSection from "@/components/StatsSection";
 import TrustBadges from "@/components/TrustBadges";
+import ScrollToTop from "@/components/ScrollToTop";
 
 const Index = () => {
   useEffect(() => {
@@ -46,6 +47,7 @@ const Index = () => {
     <div className="min-h-screen bg-background">
       <ProgressBar />
       <FloatingElements />
+      <ScrollToTop />
       <Header />
       <main>
         <HeroSection />

@@ -21,8 +21,8 @@ const ProgressBar = () => {
       
       setScrollProgress(progress);
       
-      // Show/hide based on scroll position
-      setIsVisible(scrollTop < 100 || scrollTop > documentHeight - 100);
+      // Always keep visible for better UX
+      setIsVisible(true);
       
       if (progress >= 99 && !hasClaimedBonus && !localStorage.getItem("bonusClaimed")) {
         setShowBonus(true);
@@ -47,7 +47,7 @@ const ProgressBar = () => {
 
   return (
     <>
-      <div className={`fixed top-20 left-0 right-0 z-45 transition-all duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+      <div className={`fixed top-20 left-0 right-0 z-[45] transition-all duration-300 ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
         <div className="bg-gradient-to-r from-primary/90 via-primary-glow/90 to-primary/90 backdrop-blur-md shadow-lg border-b border-primary/30">
           <div className="container mx-auto px-4 py-2">
             <div className="flex items-center gap-4">

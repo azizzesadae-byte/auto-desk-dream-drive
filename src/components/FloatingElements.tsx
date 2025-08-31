@@ -5,6 +5,7 @@ import { toast } from "@/hooks/use-toast";
 const FloatingElements = () => {
   const [showPromo, setShowPromo] = useState(false);
   const [showNotification, setShowNotification] = useState(false);
+  const [showVideoReviewOffer, setShowVideoReviewOffer] = useState(false);
   const [currentNotification, setCurrentNotification] = useState(0);
 
   const notifications = [
@@ -21,6 +22,11 @@ const FloatingElements = () => {
       setShowPromo(true);
     }, 10000);
 
+    // Show video review offer after 25 seconds (after promo)
+    const videoReviewTimer = setTimeout(() => {
+      setShowVideoReviewOffer(true);
+    }, 25000);
+
     // Show notifications periodically
     const notificationInterval = setInterval(() => {
       setShowNotification(true);
@@ -28,19 +34,20 @@ const FloatingElements = () => {
         setShowNotification(false);
         setCurrentNotification((prev) => (prev + 1) % notifications.length);
       }, 5000);
-    }, 15000);
+    }, 20000);
 
     return () => {
       clearTimeout(promoTimer);
+      clearTimeout(videoReviewTimer);
       clearInterval(notificationInterval);
     };
   }, []);
 
   return (
     <>
-      {/* Floating Promo Badge */}
+      {/* Floating Promo Badge - Positioned to not overlap with video review */}
       {showPromo && (
-        <div className="fixed bottom-32 md:bottom-24 right-4 z-40 animate-bounce">
+        <div className="fixed bottom-32 md:bottom-40 right-4 z-40 animate-bounce">
           <div className="relative">
             <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white px-4 py-3 rounded-lg shadow-2xl max-w-xs border-2 border-white/20">
               <button
@@ -62,7 +69,30 @@ const FloatingElements = () => {
         </div>
       )}
 
-      {/* Live Notifications - positioned higher to avoid overlap */}
+      {/* Video Review Offer - Positioned below promo */}
+      {showVideoReviewOffer && (
+        <div className="fixed bottom-20 md:bottom-24 right-4 z-40 animate-fade-in">
+          <div className="relative">
+            <div className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-3 rounded-lg shadow-2xl max-w-xs border-2 border-white/20">
+              <button
+                onClick={() => setShowVideoReviewOffer(false)}
+                className="absolute -top-2 -right-2 bg-white text-gray-700 rounded-full p-1 shadow-lg hover:bg-gray-100"
+              >
+                <X className="w-4 h-4" />
+              </button>
+              <div className="flex items-center gap-3">
+                <TrendingUp className="w-6 h-6 animate-pulse" />
+                <div>
+                  <p className="font-bold text-sm">50,000₽ скидка</p>
+                  <p className="text-xs">за видеоотзыв!</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Live Notifications - positioned on left to avoid overlap with right-side elements */}
       {showNotification && (
         <div className="fixed bottom-20 md:bottom-4 left-4 z-40 animate-slide-in-left">
           <div className="bg-card/95 backdrop-blur-sm border-2 border-primary/30 rounded-lg shadow-xl p-4 max-w-sm">
