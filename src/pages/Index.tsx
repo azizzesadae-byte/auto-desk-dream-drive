@@ -20,6 +20,9 @@ import OverlayManager from "@/components/OverlayManager";
 import StatsSection from "@/components/StatsSection";
 import TrustBadges from "@/components/TrustBadges";
 import ScrollToTop from "@/components/ScrollToTop";
+import ExpertsSection from "@/components/ExpertsSection";
+import PublicDealsSection from "@/components/PublicDealsSection";
+import OwnersClubSection from "@/components/OwnersClubSection";
 
 const Index = () => {
   useEffect(() => {
@@ -54,11 +57,15 @@ const Index = () => {
         
         <TrustBadges />
         
+        <PublicDealsSection />
+        
         <CTAMiniForm 
           variant="quiz" 
-          title="🎯 Не знаете какой автомобиль выбрать?"
-          description="Пройдите тест за 2 минуты и получите персональную подборку + скидку 50,000₽"
+          title="🔥 Смотрите реальные сделки!"
+          description="Полная прозрачность цен и сроков"
         />
+        
+        <ExpertsSection />
         
         <AudiencesSection />
         
@@ -66,16 +73,18 @@ const Index = () => {
         
         <CTAMiniForm 
           variant="calculator"
-          title="💰 Узнайте точную экономию за 30 секунд"
-          description="Рассчитаем полную стоимость с учетом всех расходов и покажем вашу выгоду"
+          title="Узнайте финальную цену под ключ"
+          description="Фиксация на 30 дней • Без скрытых платежей"
         />
         
         <AdvantagesSection />
         
+        <OwnersClubSection />
+        
         <CTAMiniForm 
           variant="bonus"
-          title="🔥 Горячее предложение дня!"
-          description="Только сегодня: скидка 75,000₽ + бесплатная доставка для первых 10 клиентов"
+          title="50,000₽ скидка за видеоотзыв"
+          description="Сделайте отзыв после получения авто"
         />
         
         <CasesSection />

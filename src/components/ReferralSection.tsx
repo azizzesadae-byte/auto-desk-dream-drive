@@ -122,10 +122,10 @@ const ReferralSection = () => {
       
       <div className="container mx-auto px-4 relative z-10">
         {/* Header */}
-        <div className="text-center mb-12">
-          <Badge className="mb-4" variant="secondary">
-            <Share2 className="w-3 h-3 mr-1" />
-            Партнерская программа
+      <div className="text-center mb-12">
+        <Badge className="mb-4" variant="secondary">
+          <Share2 className="w-3 h-3 mr-1" />
+          Реферальный клуб "Инсайдер"
           </Badge>
           <h2 className="text-4xl font-bold mb-4">
             Зарабатывайте вместе с нами

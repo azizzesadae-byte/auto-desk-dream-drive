@@ -3,12 +3,12 @@ import { Shield, Award, CheckCircle, Star, Lock, Zap } from "lucide-react";
 
 const TrustBadges = () => {
   const badges = [
-    { icon: <Shield className="w-6 h-6" />, text: "100% Защита сделки" },
-    { icon: <Award className="w-6 h-6" />, text: "Гарантия лучшей цены" },
-    { icon: <CheckCircle className="w-6 h-6" />, text: "Проверено 2000+ клиентов" },
-    { icon: <Star className="w-6 h-6" />, text: "Рейтинг 4.9/5" },
-    { icon: <Lock className="w-6 h-6" />, text: "Безопасная оплата" },
-    { icon: <Zap className="w-6 h-6" />, text: "Быстрая доставка" }
+    { icon: <Shield className="w-6 h-6" />, text: "Эскроу-счет в РФ" },
+    { icon: <Award className="w-6 h-6" />, text: "Price-Lock 30 дней" },
+    { icon: <CheckCircle className="w-6 h-6" />, text: "Double-check 240" },
+    { icon: <Star className="w-6 h-6" />, text: "Возврат 85% через год" },
+    { icon: <Lock className="w-6 h-6" />, text: "LegalShield 360" },
+    { icon: <Zap className="w-6 h-6" />, text: "SLA-компенсация" }
   ];
 
   return (

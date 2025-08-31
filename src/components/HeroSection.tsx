@@ -28,19 +28,19 @@ export default function HeroSection() {
   }, []);
 
   const stats = [
-    { value: "$105M+", label: "сэкономлено клиентам", icon: DollarSign },
-    { value: "45+", label: "брендов без санкций", icon: Shield },
-    { value: "85%", label: "гарантия выкупа", icon: TrendingDown },
-    { value: "50/50", label: "делим сторгованное", icon: Gift }
+    { value: "$105,969,750", label: "сэкономлено клиентам по всему миру", icon: DollarSign },
+    { value: "50/50", label: "делим сторгованное пополам", icon: Gift },
+    { value: "85%", label: "гарантированный выкуп через год", icon: TrendingDown },
+    { value: "45+", label: "брендов несмотря на санкции", icon: Shield }
   ];
 
   const killerFeatures = [
-    { icon: Shield, text: "Live-видео из контейнера 24/7", highlight: true },
-    { icon: TrendingDown, text: "Экономия до 40% от цен РФ", highlight: true },
-    { icon: Clock, text: "Фиксация цены на 30 дней" },
-    { icon: Gift, text: "Поездка в Корею от $50K" },
-    { icon: Car, text: "Параллельный импорт 45+ брендов" },
-    { icon: Zap, text: "Tesla и электрокары под ключ" }
+    { icon: Shield, text: "Live-трансляция из контейнера 24/7", highlight: true },
+    { icon: TrendingDown, text: "На 40% дешевле вторичного рынка РФ", highlight: true },
+    { icon: Clock, text: "Price-Lock 30: цена не изменится" },
+    { icon: Gift, text: "Бесплатная поездка в Корею от $50K" },
+    { icon: Car, text: "Единственный офис в Японии" },
+    { icon: Zap, text: "Подборка за 60 минут в WhatsApp" }
   ];
 
   return (
@@ -73,19 +73,19 @@ export default function HeroSection() {
             </div>
 
             <h1 className="text-5xl lg:text-7xl font-heading font-black text-foreground mb-6 leading-tight">
-              Авто из-за границы{" "}
+              Доставим любое авто{" "}
               <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent animate-pulse">
-                под ключ
+                несмотря на санкции
               </span>
             </h1>
 
             <p className="text-xl lg:text-2xl text-muted-foreground mb-4">
-              на 20–40% дешевле, чем в России
+              До 50% выгоднее вторичного рынка РФ
             </p>
 
             <p className="text-lg text-muted-foreground/80 mb-8">
-              Эксклюзив из ОАЭ и Японии, электрокары Tesla и ретро-авто – 
-              привезем любую машину вашей мечты. Полная гарантия и никаких хлопот!
+              Прямые поставки с аукционов Copart, IAAI, Manheim. Собственные офисы в Японии, 
+              Корее, ОАЭ. Tesla, премиум, раритеты – привезем с гарантией выкупа.
             </p>
 
             {/* Killer Features Grid */}
@@ -113,7 +113,7 @@ export default function HeroSection() {
                 className="group bg-gradient-to-r from-primary to-primary-glow hover:shadow-glow text-lg px-8 py-6"
                 onClick={() => setIsQuizOpen(true)}
               >
-                Подобрать авто под себя
+                Получить 5 вариантов за 60 минут
                 <ChevronRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
               </Button>
               <Button
@@ -122,7 +122,7 @@ export default function HeroSection() {
                 className="border-primary/50 hover:bg-primary/10 text-lg px-8 py-6"
                 onClick={() => setIsCalculatorOpen(true)}
               >
-                Рассчитать стоимость
+                Узнать финальную цену под ключ
               </Button>
             </div>
 
