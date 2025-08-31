@@ -9,8 +9,11 @@ const ProgressBar = () => {
   const [scrollProgress, setScrollProgress] = useState(0);
   const [showBonus, setShowBonus] = useState(false);
   const [phone, setPhone] = useState("");
-  const [hasClaimedBonus, setHasClaimedBonus] = useState(false);
+  const [hasClaimedBonus, setHasClaimedBonus] = useState(() => {
+    return localStorage.getItem("bonusClaimed") === "true";
+  });
   const [isVisible, setIsVisible] = useState(true);
+  const [hasShownPopup, setHasShownPopup] = useState(false);
 
   // Throttled scroll handler for better performance
   const handleScroll = useCallback(() => {
@@ -25,8 +28,10 @@ const ProgressBar = () => {
       setScrollProgress(progress);
       setIsVisible(true);
       
-      if (progress >= 99 && !hasClaimedBonus && !localStorage.getItem("bonusClaimed")) {
+      // Show bonus popup only once when reaching 99% for the first time
+      if (progress >= 99 && !hasClaimedBonus && !hasShownPopup && !localStorage.getItem("bonusClaimed")) {
         setShowBonus(true);
+        setHasShownPopup(true);
       }
       
       ticking = false;
@@ -38,7 +43,7 @@ const ProgressBar = () => {
         ticking = true;
       }
     };
-  }, [hasClaimedBonus]);
+  }, [hasClaimedBonus, hasShownPopup]);
 
   useEffect(() => {
     const scrollHandler = handleScroll();
@@ -115,7 +120,12 @@ const ProgressBar = () => {
         </div>
       </div>
 
-      <Dialog open={showBonus} onOpenChange={setShowBonus}>
+      <Dialog open={showBonus} onOpenChange={(open) => {
+        // Allow closing the dialog but don't show it again
+        if (!open) {
+          setShowBonus(false);
+        }
+      }}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2 text-2xl">
