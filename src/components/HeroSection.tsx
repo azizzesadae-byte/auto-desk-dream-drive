@@ -44,7 +44,7 @@ export default function HeroSection() {
   ];
 
   return (
-    <section className="relative min-h-screen md:min-h-screen min-h-[60vh] flex items-center justify-center overflow-hidden pt-24 md:pt-32">
+    <section className="relative min-h-screen md:min-h-screen min-h-[60vh] flex items-center justify-center overflow-hidden pt-20">
       {/* Video Background */}
       <div className="absolute inset-0 z-0">
         <video
@@ -52,7 +52,7 @@ export default function HeroSection() {
           muted
           loop
           playsInline
-          className="absolute inset-0 w-full h-full object-cover"
+          className="absolute inset-0 w-full h-full object-cover opacity-30"
         >
           <source src="https://cdn.pixabay.com/video/2019/11/18/29544-374055843_large.mp4" type="video/mp4" />
         </video>

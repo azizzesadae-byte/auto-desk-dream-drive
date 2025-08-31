@@ -8,39 +8,40 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Core colors - Auto-Desk theme */
-    --background: 0 0% 100%;
-    --foreground: 222 47% 11%;
+  :root {
+    /* Core colors - Auto-Desk theme (dark with green accent) */
+    --background: 200 19% 18%;
+    --foreground: 0 0% 95%;
     
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card: 200 15% 22%;
+    --card-foreground: 0 0% 95%;
     
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover: 200 15% 22%;
+    --popover-foreground: 0 0% 95%;
     
-    /* Primary - Deep blue */
-    --primary: 222 47% 40%;
-    --primary-foreground: 0 0% 100%;
-    --primary-glow: 210 50% 50%;
+    /* Primary - Bright green */
+    --primary: 82 85% 55%;
+    --primary-foreground: 0 0% 10%;
+    --primary-glow: 82 85% 65%;
     
-    /* Secondary - Light gray */
-    --secondary: 210 40% 96%;
-    --secondary-foreground: 222 47% 11%;
+    /* Secondary - Dark slate with contrast */
+    --secondary: 200 15% 28%;
+    --secondary-foreground: 0 0% 95%;
     
-    --muted: 210 40% 96%;
-    --muted-foreground: 215 16% 35%;
+    --muted: 200 10% 35%;
+    --muted-foreground: 0 0% 75%;
     
-    /* Accent - Vibrant blue */
-    --accent: 210 40% 96%;
-    --accent-foreground: 222 47% 11%;
-    --accent-glow: 210 50% 60%;
+    /* Accent - Vibrant green */
+    --accent: 82 85% 55%;
+    --accent-foreground: 0 0% 10%;
+    --accent-glow: 82 85% 65%;
     
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
     
-    --border: 214 32% 91%;
-    --input: 214 32% 91%;
-    --ring: 222 47% 40%;
+    --border: 200 10% 30%;
+    --input: 200 15% 25%;
+    --ring: 82 85% 55%;
     
     --radius: 0.75rem;
     
@@ -58,11 +59,11 @@ All colors MUST be HSL.
     --transition-bounce: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
     
     --sidebar-background: 200 20% 12%;
-    --sidebar-foreground: 0 0% 100%;
+    --sidebar-foreground: 0 0% 95%;
     --sidebar-primary: 82 85% 55%;
-    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-primary-foreground: 0 0% 10%;
     --sidebar-accent: 200 15% 20%;
-    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-accent-foreground: 0 0% 95%;
     --sidebar-border: 200 10% 25%;
     --sidebar-ring: 82 85% 55%;
   }

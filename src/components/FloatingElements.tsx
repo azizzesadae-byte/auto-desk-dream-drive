@@ -40,9 +40,9 @@ const FloatingElements = () => {
     <>
       {/* Floating Promo Badge */}
       {showPromo && (
-        <div className="fixed bottom-24 right-4 z-40 animate-bounce">
+        <div className="fixed bottom-32 md:bottom-24 right-4 z-40 animate-bounce">
           <div className="relative">
-            <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white px-4 py-3 rounded-lg shadow-2xl max-w-xs">
+            <div className="bg-gradient-to-r from-red-500 to-orange-500 text-white px-4 py-3 rounded-lg shadow-2xl max-w-xs border-2 border-white/20">
               <button
                 onClick={() => setShowPromo(false)}
                 className="absolute -top-2 -right-2 bg-white text-gray-700 rounded-full p-1 shadow-lg hover:bg-gray-100"
@@ -62,10 +62,10 @@ const FloatingElements = () => {
         </div>
       )}
 
-      {/* Live Notifications */}
+      {/* Live Notifications - positioned higher to avoid overlap */}
       {showNotification && (
-        <div className="fixed bottom-4 left-4 z-40 animate-slide-in-left">
-          <div className="bg-white/95 backdrop-blur-sm border border-primary/20 rounded-lg shadow-xl p-4 max-w-sm">
+        <div className="fixed bottom-20 md:bottom-4 left-4 z-40 animate-slide-in-left">
+          <div className="bg-card/95 backdrop-blur-sm border-2 border-primary/30 rounded-lg shadow-xl p-4 max-w-sm">
             <div className="flex items-start gap-3">
               <div className="p-2 bg-primary/10 rounded-full">
                 <Users className="w-5 h-5 text-primary" />
@@ -90,8 +90,8 @@ const FloatingElements = () => {
         </div>
       )}
 
-      {/* Sticky Mobile CTA */}
-      <div className="fixed bottom-0 left-0 right-0 z-30 md:hidden bg-background/95 backdrop-blur-lg border-t">
+      {/* Sticky Mobile CTA - with dark theme */}
+      <div className="fixed bottom-0 left-0 right-0 z-30 md:hidden bg-card/95 backdrop-blur-lg border-t border-border">
         <div className="p-3 flex gap-2">
           <button
             onClick={() => {
