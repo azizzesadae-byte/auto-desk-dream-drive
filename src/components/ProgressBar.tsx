@@ -2,7 +2,7 @@ import { useEffect, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Gift, Trophy, Sparkles, ChevronDown, Zap } from "lucide-react";
+import { Gift, Trophy, Sparkles, ChevronDown, Zap, TrendingUp } from "lucide-react";
 import { toast } from "sonner";
 
 const ProgressBar = () => {
@@ -63,35 +63,51 @@ const ProgressBar = () => {
 
   return (
     <>
-      {/* Progress bar with proper positioning and visibility */}
+      {/* Progress bar with enhanced visibility */}
       <div className={`fixed top-0 left-0 right-0 z-[60] transition-all duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
-        {/* Progress bar */}
-        <div className="h-2 bg-primary/10">
+        {/* Enhanced progress bar */}
+        <div className="h-3 bg-gradient-to-r from-primary/20 to-primary-glow/20 relative overflow-hidden">
           <div 
-            className="h-full bg-gradient-to-r from-primary to-primary-glow transition-all duration-500 shadow-glow"
+            className="h-full bg-gradient-to-r from-primary via-primary-glow to-primary transition-all duration-500 relative"
             style={{ width: `${scrollProgress}%` }}
-          />
+          >
+            {/* Animated glow effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
+          </div>
+          {/* Pulsing end indicator */}
+          {scrollProgress > 0 && scrollProgress < 100 && (
+            <div 
+              className="absolute top-0 bottom-0 w-1 bg-white/50 animate-pulse shadow-glow"
+              style={{ left: `${scrollProgress}%`, transform: 'translateX(-50%)' }}
+            />
+          )}
         </div>
         
-        {/* Compact info bar */}
-        <div className="bg-background backdrop-blur-md border-b border-border/50 shadow-sm">
-          <div className="container mx-auto px-4 py-2">
+        {/* Enhanced info bar */}
+        <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-primary-glow/10 backdrop-blur-md border-b-2 border-primary/30 shadow-lg">
+          <div className="container mx-auto px-4 py-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <span className="text-sm font-medium text-foreground">Прогресс изучения:</span>
-                <span className="text-sm font-bold text-primary bg-primary/10 px-2 py-0.5 rounded">{Math.round(scrollProgress)}%</span>
+                <div className="flex items-center gap-2 bg-primary/20 px-3 py-1 rounded-full animate-pulse-glow">
+                  <span className="text-sm font-bold text-primary">ПРОГРЕСС:</span>
+                  <span className="text-lg font-black text-primary bg-white/90 px-2 rounded">{Math.round(scrollProgress)}%</span>
+                </div>
               </div>
               
               {scrollProgress < 99 ? (
-                <span className="text-sm text-muted-foreground hidden sm:block">
-                  Изучите весь сайт → бонус 100,000₽
-                </span>
-              ) : (
                 <div className="flex items-center gap-2">
-                  <Trophy className="w-5 h-5 text-yellow-500 animate-pulse" />
-                  <span className="text-sm font-bold text-primary animate-pulse">
-                    Бонус 100,000₽ доступен!
+                  <Gift className="w-5 h-5 text-primary animate-bounce" />
+                  <span className="text-sm font-medium text-foreground">
+                    Изучите весь сайт → <span className="font-bold text-primary">бонус 100,000₽</span>
                   </span>
+                </div>
+              ) : (
+                <div className="flex items-center gap-2 bg-yellow-500/20 px-4 py-1 rounded-full animate-pulse">
+                  <Trophy className="w-6 h-6 text-yellow-500" />
+                  <span className="text-base font-black text-yellow-600">
+                    БОНУС 100,000₽ РАЗБЛОКИРОВАН!
+                  </span>
+                  <Sparkles className="w-5 h-5 text-yellow-500 animate-spin" />
                 </div>
               )}
             </div>
