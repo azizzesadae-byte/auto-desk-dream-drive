@@ -26,11 +26,12 @@ export default function VideoSection() {
             className="relative group cursor-pointer rounded-2xl overflow-hidden shadow-elegant animate-scale-in"
             onClick={() => setIsVideoOpen(true)}
           >
-            <img
-              src={davidychVideoThumb}
-              alt="Видео от Давидыча"
-              className="w-full aspect-video object-cover"
-            />
+              <img
+                src={davidychVideoThumb}
+                alt="Видео от Давидыча"
+                className="w-full aspect-video object-cover"
+                loading="lazy"
+              />
             <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent" />
             
             {/* Play Button */}
@@ -47,6 +48,7 @@ export default function VideoSection() {
                   src={davidychVideoThumb}
                   alt="Давидыч"
                   className="w-16 h-16 rounded-full border-4 border-primary"
+                  loading="lazy"
                 />
                 <div>
                   <h3 className="text-2xl font-bold text-foreground mb-1">

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -19,9 +19,13 @@ import {
   DollarSign,
   UserPlus,
   Share2,
-  ArrowUpRight
+  ArrowUpRight,
+  Copy,
+  QrCode,
+  Link2
 } from "lucide-react";
 import { toast } from "@/hooks/use-toast";
+import MissionBlock from "./MissionBlock";
 
 const ReferralSection = () => {
   // Calculator state
@@ -33,6 +37,8 @@ const ReferralSection = () => {
   // Form state
   const [phone, setPhone] = useState("");
   const [showDetails, setShowDetails] = useState(false);
+  const [referralLink, setReferralLink] = useState("");
+  const [showQR, setShowQR] = useState(false);
 
   // Calculate earnings
   const calculateEarnings = () => {
@@ -59,9 +65,42 @@ const ReferralSection = () => {
         title: "🎉 Поздравляем!",
         description: "Вы зарегистрированы в реферальной программе. Менеджер свяжется для активации."
       });
+      // Generate referral link
+      const userId = Math.random().toString(36).substring(7);
+      const newLink = `https://auto-desk.ru/?ref=${userId}`;
+      setReferralLink(newLink);
+      localStorage.setItem('referralLink', newLink);
       setPhone("");
     }
   };
+
+  const copyReferralLink = () => {
+    if (referralLink) {
+      navigator.clipboard.writeText(referralLink);
+      toast({
+        title: "✅ Готово!",
+        description: "Ссылка скопирована в буфер обмена"
+      });
+    }
+  };
+
+  const shareReferralLink = () => {
+    if (navigator.share && referralLink) {
+      navigator.share({
+        title: 'Стань партнером Auto-Desk',
+        text: 'Зарабатывай до 500,000₽ в месяц на рекомендациях!',
+        url: referralLink
+      });
+    }
+  };
+
+  useEffect(() => {
+    // Check if user already has a referral link
+    const savedLink = localStorage.getItem('referralLink');
+    if (savedLink) {
+      setReferralLink(savedLink);
+    }
+  }, []);
 
   const leaderboard = [
     { rank: 1, name: "Александр М.", clients: 247, earnings: "₽2,470,000", badge: "💎 Diamond" },
@@ -201,6 +240,50 @@ const ReferralSection = () => {
 
           {/* Calculator Tab */}
           <TabsContent value="calculator" className="space-y-6">
+            {/* Referral Link Block */}
+            {referralLink && (
+              <Card className="border-primary/30 bg-gradient-to-br from-primary/5 to-primary-glow/5">
+                <div className="p-6">
+                  <h3 className="text-lg font-bold flex items-center gap-2 mb-4">
+                    <Link2 className="w-5 h-5 text-primary" />
+                    Ваша партнерская ссылка
+                  </h3>
+                  <div className="space-y-4">
+                    <div className="flex gap-2">
+                      <Input 
+                        value={referralLink} 
+                        readOnly 
+                        className="flex-1 bg-background/50"
+                      />
+                      <Button onClick={copyReferralLink} size="icon" variant="outline">
+                        <Copy className="w-4 h-4" />
+                      </Button>
+                      <Button onClick={() => setShowQR(!showQR)} size="icon" variant="outline">
+                        <QrCode className="w-4 h-4" />
+                      </Button>
+                      {navigator.share && (
+                        <Button onClick={shareReferralLink} size="icon" variant="outline">
+                          <Share2 className="w-4 h-4" />
+                        </Button>
+                      )}
+                    </div>
+                    {showQR && (
+                      <div className="p-4 bg-white rounded-lg w-fit mx-auto">
+                        <div className="w-32 h-32 bg-muted rounded flex items-center justify-center">
+                          <QrCode className="w-20 h-20 text-foreground" />
+                        </div>
+                      </div>
+                    )}
+                    <div className="text-sm text-muted-foreground">
+                      Делитесь ссылкой и получайте до 18% от каждой сделки!
+                    </div>
+                  </div>
+                </div>
+              </Card>
+            )}
+
+            {/* Missions Block */}
+            <MissionBlock />
             <Card className="p-8">
               <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
                 <Calculator className="w-6 h-6 text-primary" />

@@ -58,9 +58,12 @@ const ProgressBar = () => {
     }
   };
 
+  // Check for reduced motion preference
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   return (
     <>
-      <div className={`fixed top-[4.5rem] left-0 right-0 z-[49] transition-all duration-300 ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'}`}>
+      <div className={`fixed top-[4.5rem] md:top-[4rem] left-0 right-0 z-[48] transition-all duration-300 ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'} ${prefersReducedMotion ? 'motion-reduce' : ''}`}>
         <div className="bg-gradient-to-r from-primary/95 via-primary-glow/95 to-primary/95 backdrop-blur-md shadow-lg border-b border-primary/20">
           <div className="container mx-auto px-4 py-2">
             <div className="flex items-center gap-4">

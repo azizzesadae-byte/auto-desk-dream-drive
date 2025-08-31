@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { X, Gift, Star, Percent, Video } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
@@ -13,11 +13,13 @@ interface OverlayItem {
 }
 
 const OverlayManager = () => {
-  const [activeOverlays, setActiveOverlays] = useState<string[]>([]);
+  const [activeOverlay, setActiveOverlay] = useState<string | null>(null);
   const [dismissedOverlays, setDismissedOverlays] = useState<string[]>(() => {
     const stored = localStorage.getItem("dismissedOverlays");
     return stored ? JSON.parse(stored) : [];
   });
+  const overlayQueue = useRef<string[]>([]);
+  const queueTimer = useRef<NodeJS.Timeout | null>(null);
 
   const overlays: OverlayItem[] = [
     {
@@ -94,73 +96,104 @@ const OverlayManager = () => {
   ];
 
   const handleDismiss = (id: string) => {
-    setActiveOverlays(prev => prev.filter(item => item !== id));
+    setActiveOverlay(null);
     const newDismissed = [...dismissedOverlays, id];
     setDismissedOverlays(newDismissed);
     localStorage.setItem("dismissedOverlays", JSON.stringify(newDismissed));
+    
+    // Process next overlay in queue after a delay
+    if (overlayQueue.current.length > 0) {
+      queueTimer.current = setTimeout(() => {
+        const nextOverlay = overlayQueue.current.shift();
+        if (nextOverlay) setActiveOverlay(nextOverlay);
+      }, 1500);
+    }
+  };
+
+  const processQueue = () => {
+    if (!activeOverlay && overlayQueue.current.length > 0) {
+      const nextOverlay = overlayQueue.current.shift();
+      if (nextOverlay) setActiveOverlay(nextOverlay);
+    }
   };
 
   useEffect(() => {
     const timers: NodeJS.Timeout[] = [];
-
-    overlays
+    
+    // Clear existing queue
+    overlayQueue.current = [];
+    
+    // Build queue from available overlays
+    const availableOverlays = overlays
       .filter(overlay => !dismissedOverlays.includes(overlay.id))
-      .sort((a, b) => a.priority - b.priority)
-      .forEach((overlay, index) => {
-        const adjustedDelay = overlay.delay + (index * 2000); // Stagger overlays
+      .sort((a, b) => a.priority - b.priority);
+    
+    availableOverlays.forEach((overlay) => {
+      const showTimer = setTimeout(() => {
+        // Add to queue instead of showing immediately
+        overlayQueue.current.push(overlay.id);
+        processQueue();
         
-        const showTimer = setTimeout(() => {
-          setActiveOverlays(prev => {
-            if (prev.length >= 2) return prev; // Max 2 overlays at once
-            return [...prev, overlay.id];
-          });
+        // Auto-dismiss after duration if specified
+        if (overlay.duration && activeOverlay === overlay.id) {
+          const hideTimer = setTimeout(() => {
+            if (activeOverlay === overlay.id) {
+              setActiveOverlay(null);
+              processQueue();
+            }
+          }, overlay.duration);
+          timers.push(hideTimer);
+        }
+      }, overlay.delay);
+      
+      timers.push(showTimer);
+    });
 
-          if (overlay.duration) {
-            const hideTimer = setTimeout(() => {
-              setActiveOverlays(prev => prev.filter(id => id !== overlay.id));
-            }, overlay.duration);
-            timers.push(hideTimer);
-          }
-        }, adjustedDelay);
-        
-        timers.push(showTimer);
-      });
-
-    return () => timers.forEach(timer => clearTimeout(timer));
+    return () => {
+      timers.forEach(timer => clearTimeout(timer));
+      if (queueTimer.current) clearTimeout(queueTimer.current);
+    };
   }, [dismissedOverlays]);
+
+  // Process queue when active overlay changes
+  useEffect(() => {
+    if (!activeOverlay) {
+      processQueue();
+    }
+  }, [activeOverlay]);
 
   const getPositionClasses = (position: OverlayItem["position"]) => {
     const base = "fixed z-[60] m-4 animate-fade-in";
+    const isMobile = window.innerWidth < 768;
+    
     switch (position) {
-      case "top-left": return `${base} top-20 left-0`;
-      case "top-right": return `${base} top-20 right-0`;
-      case "bottom-left": return `${base} bottom-24 md:bottom-4 left-0`;
-      case "bottom-right": return `${base} bottom-24 md:bottom-4 right-0`;
+      case "top-left": return `${base} ${isMobile ? 'top-28' : 'top-20'} left-0`;
+      case "top-right": return `${base} ${isMobile ? 'top-28' : 'top-20'} right-0`;
+      case "bottom-left": return `${base} ${isMobile ? 'bottom-28' : 'bottom-4'} left-0`;
+      case "bottom-right": return `${base} ${isMobile ? 'bottom-28' : 'bottom-4'} right-0`;
       case "center": return `${base} top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2`;
     }
   };
 
+  const currentOverlay = overlays.find(o => o.id === activeOverlay);
+
+  if (!currentOverlay) return null;
+
   return (
-    <>
-      {overlays.map(overlay => 
-        activeOverlays.includes(overlay.id) && (
-          <div key={overlay.id} className={getPositionClasses(overlay.position)}>
-            <div className="relative max-w-sm">
-              {overlay.priority <= 2 && (
-                <button
-                  onClick={() => handleDismiss(overlay.id)}
-                  className="absolute -top-2 -right-2 z-10 w-6 h-6 bg-background/80 rounded-full flex items-center justify-center border border-border hover:bg-background transition-colors"
-                  aria-label="Закрыть"
-                >
-                  <X className="w-3 h-3" />
-                </button>
-              )}
-              {overlay.content}
-            </div>
-          </div>
-        )
-      )}
-    </>
+    <div className={getPositionClasses(currentOverlay.position)}>
+      <div className="relative max-w-sm">
+        {currentOverlay.priority <= 2 && (
+          <button
+            onClick={() => handleDismiss(currentOverlay.id)}
+            className="absolute -top-2 -right-2 z-10 w-6 h-6 bg-background/80 rounded-full flex items-center justify-center border border-border hover:bg-background transition-colors"
+            aria-label="Закрыть"
+          >
+            <X className="w-3 h-3" />
+          </button>
+        )}
+        {currentOverlay.content}
+      </div>
+    </div>
   );
 };
 

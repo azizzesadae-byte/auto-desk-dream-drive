@@ -124,6 +124,8 @@ const CTAMiniForm = ({ variant = "bonus", title, description }: CTAMiniFormProps
                     size="lg" 
                     onClick={currentVariant.action}
                     className="min-w-[180px] font-semibold"
+                    data-variant={variant}
+                    data-analytics="cta-mini-form"
                   >
                     <Sparkles className="w-4 h-4 mr-2" />
                     {currentVariant.buttonText}
@@ -181,6 +183,8 @@ const CTAMiniForm = ({ variant = "bonus", title, description }: CTAMiniFormProps
                   size="lg" 
                   className="min-w-[150px] h-12 font-semibold"
                   data-cta-trigger={variant === "callback"}
+                  data-variant={variant}
+                  data-analytics="cta-mini-form"
                 >
                   <Sparkles className="w-4 h-4 mr-2" />
                   {currentVariant.buttonText}

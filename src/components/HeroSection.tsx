@@ -73,19 +73,19 @@ export default function HeroSection() {
             </div>
 
             <h1 className="text-5xl lg:text-7xl font-heading font-black text-foreground mb-6 leading-tight">
-              Доставим любое авто{" "}
-              <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent animate-pulse">
-                несмотря на санкции
+              Price-Lock 30:{" "}
+              <span className="bg-gradient-to-r from-primary to-primary-glow bg-clip-text text-transparent">
+                фиксируем цену и курс
               </span>
             </h1>
 
             <p className="text-xl lg:text-2xl text-muted-foreground mb-4">
-              До 50% выгоднее вторичного рынка РФ
+              Перерасход = за наш счёт • SLA +1% за каждую неделю
             </p>
 
             <p className="text-lg text-muted-foreground/80 mb-8">
-              Прямые поставки с аукционов Copart, IAAI, Manheim. Собственные офисы в Японии, 
-              Корее, ОАЭ. Tesla, премиум, раритеты – привезем с гарантией выкупа.
+              Эскроу-счет в РФ • LegalShield 360 • Double-check от 2 экспертов • 
+              Возврат 85% через год • Live-трансляция из контейнера
             </p>
 
             {/* Killer Features Grid */}
