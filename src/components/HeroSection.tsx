@@ -35,12 +35,12 @@ export default function HeroSection() {
   ];
 
   const killerFeatures = [
-    { icon: Shield, text: "Live-трансляция из контейнера 24/7", highlight: true },
-    { icon: TrendingDown, text: "На 40% дешевле вторичного рынка РФ", highlight: true },
-    { icon: Clock, text: "Price-Lock 30: цена не изменится" },
-    { icon: Gift, text: "Бесплатная поездка в Корею от $50K" },
-    { icon: Car, text: "Единственный офис в Японии" },
-    { icon: Zap, text: "Подборка за 60 минут в WhatsApp" }
+    { icon: Shield, text: "Эскроу-счет в РФ", highlight: true },
+    { icon: TrendingDown, text: "SLA +1% за каждую неделю", highlight: true },
+    { icon: Clock, text: "Price-Lock 30 дней" },
+    { icon: Gift, text: "Возврат 85% через год" },
+    { icon: Car, text: "Double-check от 2 экспертов" },
+    { icon: Zap, text: "LegalShield 360" }
   ];
 
   return (
@@ -216,36 +216,7 @@ export default function HeroSection() {
         </div>
       </div>
 
-      {/* Popup Offer */}
-      {showOffer && (
-        <div className="fixed bottom-8 right-8 z-50 animate-slide-in-right">
-          <div className="bg-card border-2 border-primary rounded-2xl p-6 max-w-sm shadow-glow">
-            <button
-              onClick={() => setShowOffer(false)}
-              className="absolute -top-2 -right-2 w-8 h-8 bg-primary text-primary-foreground rounded-full flex items-center justify-center hover:bg-primary-glow transition-colors"
-            >
-              ✕
-            </button>
-            <div className="flex items-center gap-2 mb-3">
-              <span className="text-2xl">🔥</span>
-              <h3 className="font-bold text-foreground">50,000₽ скидка за видеоотзыв!</h3>
-            </div>
-            <p className="text-sm text-muted-foreground mb-4">
-              Сделайте видеоотзыв после получения авто и получите скидку 50,000₽ на следующий заказ
-            </p>
-            <Button
-              size="sm"
-              className="w-full bg-gradient-to-r from-primary to-primary-glow"
-              onClick={() => {
-                setShowOffer(false);
-                setIsQuizOpen(true);
-              }}
-            >
-              Подробнее
-            </Button>
-          </div>
-        </div>
-      )}
+      {/* Removed popup offer to prevent overlapping */}
 
       {/* Scroll Indicator */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">

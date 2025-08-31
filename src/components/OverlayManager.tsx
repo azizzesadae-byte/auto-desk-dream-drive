@@ -25,8 +25,8 @@ const OverlayManager = () => {
     {
       id: "promo",
       priority: 1,
-      delay: 3000,
-      position: "top-left",
+      delay: 15000, // Increased delay to 15 seconds
+      position: "bottom-right",
       content: (
         <div className="bg-gradient-to-r from-primary to-primary-glow text-primary-foreground p-4 rounded-lg shadow-xl">
           <div className="flex items-center gap-2 mb-2">
@@ -51,7 +51,7 @@ const OverlayManager = () => {
     {
       id: "video-review",
       priority: 2,
-      delay: 15000,
+      delay: 30000, // Increased delay to 30 seconds
       position: "bottom-right",
       content: (
         <div className="bg-card border border-border p-4 rounded-lg shadow-xl backdrop-blur-md">
@@ -79,7 +79,7 @@ const OverlayManager = () => {
     {
       id: "live-notification",
       priority: 3,
-      delay: 8000,
+      delay: 45000, // Increased delay to 45 seconds
       duration: 5000,
       position: "bottom-left",
       content: (

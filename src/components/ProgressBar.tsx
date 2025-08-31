@@ -63,69 +63,39 @@ const ProgressBar = () => {
 
   return (
     <>
-      <div className={`fixed top-[4.5rem] md:top-[4rem] left-0 right-0 z-[48] transition-all duration-300 ${isVisible ? 'translate-y-0 opacity-100' : '-translate-y-full opacity-0'} ${prefersReducedMotion ? 'motion-reduce' : ''}`}>
-        <div className="bg-gradient-to-r from-primary/95 via-primary-glow/95 to-primary/95 backdrop-blur-md shadow-lg border-b border-primary/20">
-          <div className="container mx-auto px-4 py-2">
-            <div className="flex items-center gap-4">
-              {/* Progress info */}
-              <div className="hidden md:flex items-center gap-2">
-                <Zap className="w-5 h-5 animate-pulse text-primary-foreground" />
-                <span className="text-sm font-medium text-primary-foreground whitespace-nowrap">
-                  Изучите 100% сайта
+      {/* Progress bar with proper positioning */}
+      <div className={`fixed top-16 left-0 right-0 z-[45] transition-all duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+        <div className="h-1 bg-primary/20">
+          <div 
+            className="h-full bg-gradient-to-r from-primary to-primary-glow transition-all duration-500"
+            style={{ width: `${scrollProgress}%` }}
+          />
+        </div>
+        
+        {/* Compact info bar */}
+        <div className="bg-background/95 backdrop-blur-sm border-b border-border py-1">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-2">
+                <span className="text-xs text-muted-foreground">Прогресс:</span>
+                <span className="text-xs font-bold text-primary">{Math.round(scrollProgress)}%</span>
+              </div>
+              
+              {scrollProgress < 99 ? (
+                <span className="text-xs text-muted-foreground">
+                  Изучите весь сайт и получите бонус 100,000₽
                 </span>
-              </div>
-              
-              <div className="flex-1">
-                <div className="flex items-center justify-between mb-1">
-                  <span className="text-xs font-bold text-primary-foreground/90">
-                    Прогресс изучения
-                  </span>
-                  <span className="text-sm font-bold text-primary-foreground">
-                    {Math.round(scrollProgress)}%
+              ) : (
+                <div className="flex items-center gap-2">
+                  <Trophy className="w-4 h-4 text-yellow-500 animate-pulse" />
+                  <span className="text-xs font-bold text-primary">
+                    Бонус доступен!
                   </span>
                 </div>
-                <div className="h-3 bg-white/20 rounded-full overflow-hidden border border-white/30">
-                  <div 
-                    className="h-full bg-gradient-to-r from-white to-primary-glow transition-all duration-300 relative"
-                    style={{ width: `${scrollProgress}%` }}
-                  >
-                    <div className="absolute inset-0 bg-white/30 animate-pulse" />
-                    {scrollProgress > 10 && (
-                      <div className="absolute right-2 top-1/2 -translate-y-1/2">
-                        <div className="w-2 h-2 bg-primary-foreground rounded-full animate-ping" />
-                      </div>
-                    )}
-                  </div>
-                </div>
-                <div className="flex justify-between mt-1">
-                  <span className="text-[10px] text-primary-foreground/70">Начало</span>
-                  <span className="text-[10px] text-primary-foreground/70 font-bold">
-                    Бонус 100,000₽ 🎁
-                  </span>
-                </div>
-              </div>
-              
-              <div className={`transition-all duration-500 ${scrollProgress >= 99 ? 'scale-125 animate-bounce' : 'scale-100'}`}>
-                <div className="relative">
-                  <Trophy className={`w-8 h-8 ${scrollProgress >= 99 ? 'text-yellow-400' : 'text-primary-foreground/50'}`} />
-                  {scrollProgress >= 99 && (
-                    <div className="absolute -top-1 -right-1">
-                      <div className="w-3 h-3 bg-red-500 rounded-full animate-ping" />
-                      <div className="w-3 h-3 bg-red-500 rounded-full absolute top-0" />
-                    </div>
-                  )}
-                </div>
-              </div>
+              )}
             </div>
           </div>
         </div>
-        
-        {/* Hint arrow */}
-        {scrollProgress < 10 && (
-          <div className="absolute left-1/2 -translate-x-1/2 -bottom-6 text-primary animate-bounce">
-            <ChevronDown className="w-6 h-6" />
-          </div>
-        )}
       </div>
 
       <Dialog open={showBonus} onOpenChange={setShowBonus}>
