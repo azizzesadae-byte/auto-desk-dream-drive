@@ -8,7 +8,6 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-  :root {
     /* Core colors - Auto-Desk theme (dark with green accent) */
     --background: 200 19% 18%;
     --foreground: 0 0% 95%;
