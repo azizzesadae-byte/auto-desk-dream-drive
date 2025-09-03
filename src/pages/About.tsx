@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import Header from "@/components/Header";
+import ProgressBar from "@/components/ProgressBar";
 import Footer from "@/components/Footer";
 import ExpertsSection from "@/components/ExpertsSection";
 import OwnersClubSection from "@/components/OwnersClubSection";
@@ -29,6 +30,7 @@ const About = () => {
 
   return (
     <div className="min-h-screen bg-background">
+      <ProgressBar />
       <Header />
       
       {/* Hero Section */}
