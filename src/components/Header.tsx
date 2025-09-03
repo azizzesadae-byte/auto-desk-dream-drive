@@ -2,45 +2,37 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Phone, MessageCircle, Globe, Menu, X } from "lucide-react";
 import Logo from "@/components/Logo";
+import { Link, useLocation } from "react-router-dom";
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [language, setLanguage] = useState<"RU" | "EN">("RU");
+  const location = useLocation();
 
   return (
     <header className="fixed top-14 left-0 right-0 z-[65] bg-card/95 backdrop-blur-lg border-b border-border">
       <div className="container mx-auto px-4">
         <div className="flex items-center justify-between h-20">
-          <Logo />
+          <Link to="/">
+            <Logo />
+          </Link>
 
           <nav className="hidden lg:flex items-center gap-6">
-            <a href="#audiences" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
-              Для кого
-            </a>
-            <a href="#advantages" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
-              Преимущества
-            </a>
-            <a href="#cases" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+            <Link to="/" className={`text-muted-foreground hover:text-foreground transition-colors text-sm ${location.pathname === '/' ? 'text-foreground font-medium' : ''}`}>
+              Главная
+            </Link>
+            <Link to="/services" className={`text-muted-foreground hover:text-foreground transition-colors text-sm ${location.pathname === '/services' ? 'text-foreground font-medium' : ''}`}>
+              Услуги
+            </Link>
+            <Link to="/cases" className={`text-muted-foreground hover:text-foreground transition-colors text-sm ${location.pathname === '/cases' ? 'text-foreground font-medium' : ''}`}>
               Кейсы
-            </a>
-            <a href="#process" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
-              Как работаем
-            </a>
-            <a href="#guarantees" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
-              Гарантии
-            </a>
-            <a href="#reviews" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
-              Отзывы
-            </a>
-            <a href="#faq" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
-              FAQ
-            </a>
-            <a href="#referral" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
-              Партнерам
-            </a>
-            <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+            </Link>
+            <Link to="/about" className={`text-muted-foreground hover:text-foreground transition-colors text-sm ${location.pathname === '/about' ? 'text-foreground font-medium' : ''}`}>
+              О компании
+            </Link>
+            <Link to="/contacts" className={`text-muted-foreground hover:text-foreground transition-colors text-sm ${location.pathname === '/contacts' ? 'text-foreground font-medium' : ''}`}>
               Контакты
-            </a>
+            </Link>
           </nav>
 
           <div className="hidden lg:flex items-center gap-4">
@@ -86,33 +78,21 @@ export default function Header() {
         {isMenuOpen && (
           <nav className="lg:hidden py-6 border-t border-border animate-fade-in">
             <div className="flex flex-col gap-4">
-              <a href="#audiences" className="text-muted-foreground hover:text-foreground transition-colors">
-                Для кого
-              </a>
-              <a href="#advantages" className="text-muted-foreground hover:text-foreground transition-colors">
-                Преимущества
-              </a>
-              <a href="#cases" className="text-muted-foreground hover:text-foreground transition-colors">
+              <Link to="/" onClick={() => setIsMenuOpen(false)} className={`text-muted-foreground hover:text-foreground transition-colors ${location.pathname === '/' ? 'text-foreground font-medium' : ''}`}>
+                Главная
+              </Link>
+              <Link to="/services" onClick={() => setIsMenuOpen(false)} className={`text-muted-foreground hover:text-foreground transition-colors ${location.pathname === '/services' ? 'text-foreground font-medium' : ''}`}>
+                Услуги
+              </Link>
+              <Link to="/cases" onClick={() => setIsMenuOpen(false)} className={`text-muted-foreground hover:text-foreground transition-colors ${location.pathname === '/cases' ? 'text-foreground font-medium' : ''}`}>
                 Кейсы
-              </a>
-              <a href="#process" className="text-muted-foreground hover:text-foreground transition-colors">
-                Как работаем
-              </a>
-              <a href="#guarantees" className="text-muted-foreground hover:text-foreground transition-colors">
-                Гарантии
-              </a>
-              <a href="#reviews" className="text-muted-foreground hover:text-foreground transition-colors">
-                Отзывы
-              </a>
-              <a href="#faq" className="text-muted-foreground hover:text-foreground transition-colors">
-                FAQ
-              </a>
-              <a href="#referral" className="text-muted-foreground hover:text-foreground transition-colors">
-                Партнерам
-              </a>
-              <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors">
+              </Link>
+              <Link to="/about" onClick={() => setIsMenuOpen(false)} className={`text-muted-foreground hover:text-foreground transition-colors ${location.pathname === '/about' ? 'text-foreground font-medium' : ''}`}>
+                О компании
+              </Link>
+              <Link to="/contacts" onClick={() => setIsMenuOpen(false)} className={`text-muted-foreground hover:text-foreground transition-colors ${location.pathname === '/contacts' ? 'text-foreground font-medium' : ''}`}>
                 Контакты
-              </a>
+              </Link>
               <div className="flex gap-2 pt-4 border-t border-border">
                 <Button
                   variant="outline"
