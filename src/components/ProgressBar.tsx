@@ -1,72 +1,57 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import { Button } from "@/components/ui/button";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Input } from "@/components/ui/input";
-import { Gift, Trophy, Sparkles, CheckCircle2, Circle } from "lucide-react";
+import { Gift, Trophy, Sparkles, ChevronDown, Zap, TrendingUp } from "lucide-react";
 import { toast } from "sonner";
-import { useLocation } from "react-router-dom";
 
 const ProgressBar = () => {
-  const location = useLocation();
   const [scrollProgress, setScrollProgress] = useState(0);
-  const [pageProgress, setPageProgress] = useState(0);
-  const [visitedPages, setVisitedPages] = useState<string[]>(() => {
-    return JSON.parse(localStorage.getItem('visitedPages') || '[]');
-  });
   const [showBonus, setShowBonus] = useState(false);
   const [phone, setPhone] = useState("");
   const [hasClaimedBonus, setHasClaimedBonus] = useState(() => {
     return localStorage.getItem("bonusClaimed") === "true";
   });
+  const [isVisible, setIsVisible] = useState(true);
   const [hasShownPopup, setHasShownPopup] = useState(false);
-  
-  const totalPages = 5; // home, services, cases, about, contacts
-  const pages = [
-    { id: 'home', name: 'Главная', path: '/' },
-    { id: 'services', name: 'Услуги', path: '/services' },
-    { id: 'cases', name: 'Кейсы', path: '/cases' },
-    { id: 'about', name: 'О компании', path: '/about' },
-    { id: 'contacts', name: 'Контакты', path: '/contacts' },
-  ];
 
-  // Handle scroll progress for current page
-  useEffect(() => {
-    const handleScroll = () => {
+  // Throttled scroll handler for better performance
+  const handleScroll = useCallback(() => {
+    let ticking = false;
+    
+    const updateProgress = () => {
       const windowHeight = window.innerHeight;
       const documentHeight = document.documentElement.scrollHeight - windowHeight;
       const scrollTop = window.scrollY;
-      const progress = documentHeight > 0 ? Math.min((scrollTop / documentHeight) * 100, 100) : 0;
-      setScrollProgress(progress);
-    };
-
-    handleScroll(); // Initial call
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [location.pathname]); // Reset on route change
-
-  // Update overall site progress based on visited pages
-  useEffect(() => {
-    const handlePageVisited = () => {
-      const updatedVisitedPages = JSON.parse(localStorage.getItem('visitedPages') || '[]');
-      setVisitedPages(updatedVisitedPages);
-      const progress = (updatedVisitedPages.length / totalPages) * 100;
-      setPageProgress(progress);
+      const progress = Math.min((scrollTop / documentHeight) * 100, 100);
       
-      // Show bonus when all pages are visited and current page is scrolled to 100%
-      if (progress === 100 && scrollProgress === 100 && !hasClaimedBonus && !hasShownPopup) {
+      setScrollProgress(progress);
+      setIsVisible(true);
+      
+      // Show bonus popup only once when reaching 99% for the first time
+      if (progress >= 99 && !hasClaimedBonus && !hasShownPopup && !localStorage.getItem("bonusClaimed")) {
         setShowBonus(true);
         setHasShownPopup(true);
       }
+      
+      ticking = false;
     };
     
-    // Initial calculation
-    handlePageVisited();
-    
-    // Listen for page visit events
-    window.addEventListener('pageVisited', handlePageVisited);
-    
-    return () => window.removeEventListener('pageVisited', handlePageVisited);
-  }, [hasClaimedBonus, hasShownPopup, scrollProgress]);
+    return () => {
+      if (!ticking) {
+        requestAnimationFrame(updateProgress);
+        ticking = true;
+      }
+    };
+  }, [hasClaimedBonus, hasShownPopup]);
+
+  useEffect(() => {
+    const scrollHandler = handleScroll();
+    window.addEventListener("scroll", scrollHandler, { passive: true });
+    scrollHandler(); // Initial call
+
+    return () => window.removeEventListener("scroll", scrollHandler);
+  }, [handleScroll]);
 
   const handleClaimBonus = (e: React.FormEvent) => {
     e.preventDefault();
@@ -78,87 +63,56 @@ const ProgressBar = () => {
     }
   };
 
+  // Check for reduced motion preference
+  const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
   return (
     <>
-      {/* Fixed progress bars */}
-      <div className="fixed top-0 left-0 right-0 z-[70] transition-all duration-300">
-        {/* Current page scroll progress */}
-        <div className="h-2 bg-gradient-to-r from-primary/10 to-primary-glow/10 relative overflow-hidden">
+      {/* Progress bar with enhanced visibility */}
+      <div className={`fixed top-0 left-0 right-0 z-[70] transition-all duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'}`}>
+        {/* Enhanced progress bar */}
+        <div className="h-3 bg-gradient-to-r from-primary/20 to-primary-glow/20 relative overflow-hidden">
           <div 
-            className="h-full bg-gradient-to-r from-primary via-primary-glow to-primary transition-all duration-300 relative"
+            className="h-full bg-gradient-to-r from-primary via-primary-glow to-primary transition-all duration-500 relative"
             style={{ width: `${scrollProgress}%` }}
           >
+            {/* Animated glow effect */}
             <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/30 to-transparent animate-shimmer" />
           </div>
+          {/* Pulsing end indicator */}
+          {scrollProgress > 0 && scrollProgress < 100 && (
+            <div 
+              className="absolute top-0 bottom-0 w-1 bg-white/50 animate-pulse shadow-glow"
+              style={{ left: `${scrollProgress}%`, transform: 'translateX(-50%)' }}
+            />
+          )}
         </div>
         
-        {/* Overall site progress */}
-        <div className="h-2 bg-gradient-to-r from-accent/10 to-accent/20 relative overflow-hidden">
-          <div 
-            className="h-full bg-gradient-to-r from-accent to-accent/80 transition-all duration-500 relative"
-            style={{ width: `${pageProgress}%` }}
-          >
-            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent animate-shimmer" />
-          </div>
-        </div>
-        
-        {/* Info bar with both progress indicators */}
-        <div className="bg-gradient-to-r from-card/95 via-card/90 to-card/95 backdrop-blur-md border-b border-border shadow-md">
-          <div className="container mx-auto px-4 py-2">
+        {/* Enhanced info bar */}
+        <div className="bg-gradient-to-r from-primary/10 via-primary/5 to-primary-glow/10 backdrop-blur-md border-b-2 border-primary/30 shadow-lg">
+          <div className="container mx-auto px-4 py-3">
             <div className="flex items-center justify-between">
-              {/* Progress indicators */}
-              <div className="flex items-center gap-4">
-                {/* Page scroll progress */}
-                <div className="flex items-center gap-2">
-                  <span className="text-xs text-muted-foreground">Страница:</span>
-                  <div className="flex items-center gap-1 bg-primary/10 px-2 py-0.5 rounded-full">
-                    <span className="text-xs font-bold text-primary">{Math.round(scrollProgress)}%</span>
-                  </div>
-                </div>
-                
-                {/* Overall site progress */}
-                <div className="flex items-center gap-2">
-                  <span className="text-xs text-muted-foreground">Сайт:</span>
-                  <div className="flex items-center gap-1 bg-accent/10 px-2 py-0.5 rounded-full">
-                    <span className="text-xs font-bold text-accent">{Math.round(pageProgress)}%</span>
-                  </div>
-                </div>
-                
-                {/* Page indicators - desktop only */}
-                <div className="hidden lg:flex items-center gap-3 ml-4 pl-4 border-l border-border">
-                  {pages.map((page) => (
-                    <div key={page.id} className="flex items-center gap-1">
-                      {visitedPages.includes(page.id) ? (
-                        <CheckCircle2 className="w-3 h-3 text-green-500" />
-                      ) : (
-                        <Circle className="w-3 h-3 text-muted-foreground/50" />
-                      )}
-                      <span className={`text-xs ${visitedPages.includes(page.id) ? 'text-foreground' : 'text-muted-foreground'} ${location.pathname === page.path ? 'font-bold' : ''}`}>
-                        {page.name}
-                      </span>
-                    </div>
-                  ))}
+              <div className="flex items-center gap-3">
+                <div className="flex items-center gap-2 bg-primary/20 px-3 py-1 rounded-full animate-pulse-glow">
+                  <span className="text-sm font-bold text-primary">ПРОГРЕСС:</span>
+                  <span className="text-lg font-black text-primary bg-white/90 px-2 rounded">{Math.round(scrollProgress)}%</span>
                 </div>
               </div>
               
-              {/* Bonus indicator */}
-              {pageProgress < 100 ? (
+              {scrollProgress < 99 ? (
                 <div className="flex items-center gap-2">
-                  <Gift className="w-4 h-4 text-primary animate-bounce" />
-                  <span className="text-xs font-medium text-foreground hidden sm:inline">
-                    Изучите все разделы → <span className="font-bold text-primary">бонус 100,000₽</span>
-                  </span>
-                  <span className="text-xs font-bold text-primary sm:hidden">
-                    Бонус 100,000₽
+                  <Gift className="w-5 h-5 text-primary animate-bounce" />
+                  <span className="text-sm font-medium text-foreground">
+                    Изучите весь сайт → <span className="font-bold text-primary">бонус 100,000₽</span>
                   </span>
                 </div>
               ) : (
-                <div className="flex items-center gap-2 bg-yellow-500/20 px-3 py-0.5 rounded-full animate-pulse">
-                  <Trophy className="w-4 h-4 text-yellow-500" />
-                  <span className="text-xs font-black text-yellow-600">
-                    БОНУС ДОСТУПЕН!
+                <div className="flex items-center gap-2 bg-yellow-500/20 px-4 py-1 rounded-full animate-pulse">
+                  <Trophy className="w-6 h-6 text-yellow-500" />
+                  <span className="text-base font-black text-yellow-600">
+                    БОНУС 100,000₽ РАЗБЛОКИРОВАН!
                   </span>
-                  <Sparkles className="w-4 h-4 text-yellow-500 animate-spin" />
+                  <Sparkles className="w-5 h-5 text-yellow-500 animate-spin" />
                 </div>
               )}
             </div>
@@ -179,7 +133,7 @@ const ProgressBar = () => {
               Поздравляем! Вы изучили 100% сайта!
             </DialogTitle>
             <DialogDescription className="text-base pt-2">
-              Вы изучили все разделы сайта и получаете эксклюзивный бонус <span className="font-bold text-primary">100,000₽</span> на покупку автомобиля. 
+              Вы получаете эксклюзивный бонус <span className="font-bold text-primary">100,000₽</span> на покупку автомобиля. 
               Это предложение действует только сегодня!
             </DialogDescription>
           </DialogHeader>
