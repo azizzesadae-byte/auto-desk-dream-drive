@@ -76,6 +76,23 @@ const OverlayManager = () => {
         </div>
       ),
     },
+    {
+      id: "live-notification",
+      priority: 3,
+      delay: 45000, // Increased delay to 45 seconds
+      duration: 5000,
+      position: "bottom-left",
+      content: (
+        <div className="bg-card/95 border border-border p-3 rounded-lg shadow-lg backdrop-blur-sm">
+          <div className="flex items-center gap-2">
+            <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
+            <span className="text-sm font-medium text-foreground">
+              Михаил из Москвы только что заказал Audi Q7
+            </span>
+          </div>
+        </div>
+      ),
+    },
   ];
 
   const handleDismiss = (id: string) => {
